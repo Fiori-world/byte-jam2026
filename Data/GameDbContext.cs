@@ -4,7 +4,7 @@ using Data.DataModels;
 namespace Data;
 
 // Primary constructor to initialize
-public class ClubEventsContext(DbContextOptions<ClubEventsContext> options) : DbContext(options)
+public class GameDbContext(DbContextOptions<GameDbContext> options) : DbContext(options)
 {
 
    public DbSet<Event> Events { get; set; }
