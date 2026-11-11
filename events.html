@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunker Survival - Events</title>
+
+    <style>
+        body {
+            background-color: #6d179c;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: #30383e;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .event {
+            background-color: #414b52;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #637f64;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4d654e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Bunker Survival</h1>
+        <p>Survive the apocalypse!</p>
+
+        <div class="event">
+            <h2>Random Event</h2>
+
+            <h3 id="eventTitle">Event Title</h3>
+
+            <p id="eventDescription">
+                Your event description will appear here.
+            </p>
+        </div>
+
+        <div class="choices">
+            <button id="choice1">Choice 1</button>
+            <button id="choice2">Choice 2</button>
+        </div>
+
+        <p id="result"></p>
+
+        <button id="nextEvent">Next Event</button>
+
+    </div>
+
+</body>
+</html>
