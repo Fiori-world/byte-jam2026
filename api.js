@@ -1,19 +1,21 @@
-const API = "https://localhost:5000/api";
+// Shared by every page: all calls to the C# backend go through here
+const API = "http://localhost:5000/api";
 
 async function apiGet(path) {
-    const res = await fetch(API + path);
-    if (!res.ok) throw new Error(await res.text());
-    return res.json();
+  const res = await fetch(API + path);
+  return handle(res);
 }
 
 async function apiPost(path) {
-    const res = await fetch (API + path, {method: "POST"});
-    if (!res.ok) throw new Error(await res.text());
-    return res.json();
+  const res = await fetch(API + path, { method: "POST" });
+  return handle(res);
 }
 
-// TODO: add one function per endpoint, for example:
-// const getState    = () => apiGet("/game/state");
-// const newGame     = () => apiPost("/game/new");
-// const randomEvent = () => apiGet("/events/random");
-// const choose      = (slot) => apiPost(`/events/choose/${slot}`);
+// Turn the response into data, or into a readable error
+async function handle(res) {
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); } catch { data = text; }
+  if (!res.ok) throw new Error(typeof data === "string" ? data : "Something went wrong.");
+  return data;
+}
