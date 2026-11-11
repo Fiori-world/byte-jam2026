@@ -1,0 +1,103 @@
+
+body {
+    background-color: #f8f4ef;
+    font-family: Arial, sans-serif;
+    color: #403c3c;
+    margin: 0;
+    padding: 30px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #fffdf9;
+    border: 2px solid #8b8984;
+    border-radius: 18px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 35px;
+}
+
+.journal {
+    display: flex;
+    gap: 15px;
+}
+
+.left, .right {
+    flex: 1;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #aaa39c;
+}
+
+.left {
+    background-color: #f5e4e8;
+}
+
+.right {
+    background-color: #e8eee3;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.description {
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+.options {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 12px;
+    border: 1px solid #8b8984;
+    border-radius: 8px;
+    background-color: #e6dcef;
+    color: #403c3c;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d5c5e3;
+}
+
+.options button {
+    flex: 1;
+}
+
+.confirm {
+    width: 100%;
+    background-color: #d9e7d3;
+}
+
+.right p {
+    padding: 12px 0;
+    line-height: 1.5;
+}
+
+.back {
+    display: block;
+    margin: 50px auto 0;
+    background-color: #f2d9c9;
+}
+
+@media (max-width: 600px) {
+    .journal {
+        flex-direction: column;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
