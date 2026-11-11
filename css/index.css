@@ -1,62 +1,58 @@
-.titleBox{
-    text-align: center;
+.titleBox {
+  text-align: center;
 }
 
-
-#title{
-    display: inline-block;
-    font-family: papyrus;
-    font-size: 70px;
-    border-radius: 10px;
-    border-width: 10px;
-    border-style: groove;
-    border-color: black;
-    margin: 0 auto;
+#title {
+  display: inline-block;
+  font-family: papyrus;
+  font-size: 70px;
+  border-radius: 10px;
+  border-width: 10px;
+  border-style: groove;
+  border-color: black;
+  margin: 0 auto;
 }
 
-#flavorText{
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    font-family: papyrus;
-    font-size: 45px;
+#flavorText {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-family: papyrus;
+  font-size: 45px;
 }
 
-.buttons{
-    display: flex;
-    flex-direction: column;
-    
+.buttons {
+  display: flex;
+  flex-direction: column;
 }
 
-#Button{
-    align-self: center;
-    justify-self: center;
-    width: 200px;
-    height: 100px;
-    margin: 20px;
-    border-radius: 15px;
-    background-color: burlywood;
-    
+#Button {
+  align-self: center;
+  justify-self: center;
+  width: 200px;
+  height: 100px;
+  margin: 20px;
+  border-radius: 15px;
+  background-color: burlywood;
 }
 
-footer{
-    align-items: end;
-    justify-items: end;
-    font-size: 20px;
+footer {
+  align-items: end;
+  justify-items: end;
+  font-size: 20px;
 }
 
-body{
-    background-color: bisque;
+body {
+  background-color: bisque;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
-a:visited{
-    text-decoration: none;
-    color: black;
-    
+a:visited {
+  text-decoration: none;
+  color: black;
 }
-a:hover{
-    text-decoration: none;
+a:hover {
+  text-decoration: none;
 }
