@@ -1,0 +1,5 @@
+Casting a string to an enum doesn’t compile. .ToUpper is also missing its (). Use Enum.Parse.
+Typo in Tag: tagQuality = (Tag.Probability)(...) should be Quality.
+EF Core only maps properties, and your tagResourceAffected, tagResourceGain and tagResourceCost are private fields. Make them { get; set; } properties.
+EF Core needs a constructor it can use. It can’t bind string parameters to enum properties, so add a protected parameterless constructor to each class.
+Make Tag abstract. Your comment says it’s for inheritance only. Abstract base classes work fine with EF Core inheritance (TPH by default).
