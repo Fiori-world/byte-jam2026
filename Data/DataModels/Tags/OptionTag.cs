@@ -1,15 +1,21 @@
-using Data.DataModels.Tags.Tag;
+
 namespace Data.DataModels.Tags;
 public class OptionTag : Tag
 {
     // Class properties
-    ResourceGain tagResourceGain;
-    ResourceCost tagResourceCost;
+    public ResourceGain tagResourceGain {get; set;}
+    public ResourceCost tagResourceCost {get; set;}
     // Review Tag Constructor for syntax
     public OptionTag(string probabilityString, string qualityString, string resourceGainString, string resourceCostString) : base(probabilityString, qualityString)
     {
-        tagResourceGain = (OptionTag.ResourceGain)(resourceGainString.ToUpper);
-        tagResourceCost = (OptionTag.ResourceCost)(resourceCostString.ToUpper);
+        tagResourceGain = Enum.Parse<ResourceGain>(resourceGainString, ignoreCase: true);
+   
+        tagResourceCost = Enum.Parse<ResourceCost>(resourceCostString, ignoreCase: true);
+    }
+
+    public OptionTag() : base()
+    {
+        
     }
 
     public enum ResourceGain

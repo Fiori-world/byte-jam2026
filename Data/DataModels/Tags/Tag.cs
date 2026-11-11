@@ -1,18 +1,23 @@
 
 namespace Data.DataModels.Tags;
-public class Tag
+public abstract class Tag
 {
 
     // Class properties...
     public Probability tagProbability {get; set;}
     public Quality tagQuality {get; set;}
 
+    protected Tag()
+    {
+        
+    }
+
 // Constructor for INHERTIANCE ONLY! Do not try to initialize a Tag Object
     public Tag(string probabilityString, string qualityString)
     {
         // WARNING: NO VALIDATION. PARAMS MUST BE PERFECT
-        tagProbability = (Tag.Probability)(probabilityString.ToUpper);
-        tagQuality = (Tag.Probability)(qualityString.ToUpper);
+        tagProbability = Enum.Parse<Probability>(probabilityString, ignoreCase: true);
+        tagQuality = Enum.Parse<Quality>(qualityString, ignoreCase: true);
 
     }
     public enum Probability

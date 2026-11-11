@@ -2,13 +2,17 @@ namespace Data.DataModels.Tags;
 public class EventTag : Tag
 {
     // Class properties
-    ResourceAffected tagResourceAffected;
+    public ResourceAffected tagResourceAffected {get; set;}
     // Review Tag Constructor for syntax
     public EventTag(string probabilityString, string qualityString, string resourceAffectedString) : base(probabilityString, qualityString)
     {
-        tagResourceAffected = (EventTag.ResourceAffected)(resourceAffectedString.ToUpper);
+        tagResourceAffected = (EventTag.ResourceAffected)(resourceAffectedString.ToUpper());
     }
 
+    public EventTag() : base()
+    {
+        
+    }
     public enum ResourceAffected
     {
         
