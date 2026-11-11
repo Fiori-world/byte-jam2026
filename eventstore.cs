@@ -13,11 +13,11 @@ class DatabaseEventStore(GameDbContext db) : IEventStore
 {
     // COMMON shows up 6x as often as RARE (TODO: tune these numbers)
     static int Weight(Event e) =>
-        (e.Tags.FirstOrDefault()?.Probability ?? Probability.COMMON) switch
+        (e.Tags.FirstOrDefault()?.tagProbability ?? Tag.Probability.COMMON) switch
         {
-            Probability.COMMON   => 6,
-            Probability.UNCOMMON => 3,
-            _                    => 1
+            Tag.Probability.COMMON   => 6,
+            Tag.Probability.UNCOMMON => 3,
+            _                        => 1
         };
 
     public async Task<Event?> GetRandomEventAsync()

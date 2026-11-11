@@ -1,6 +1,5 @@
 using Data;
 using Data.DataModels;
-using Data.DataModels.Tags;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,23 +53,22 @@ class GameState
         foreach (var tag in option.Tags)
         {
             // Better quality = gain more, lose less (TODO: tune these numbers)
-            int gain = (int)tag.Quality + 1;   // HORRIBLE 1 ... INCREDIBLE 5
-            int cost = 5 - (int)tag.Quality;   // HORRIBLE 5 ... INCREDIBLE 1
+            int gain = (int)tag.tagQuality + 1;   // HORRIBLE 1 ... INCREDIBLE 5
+            int cost = 5 - (int)tag.tagQuality;   // HORRIBLE 5 ... INCREDIBLE 1
 
-            Change(tag.ResourceGain, +gain);
-            Change(tag.ResourceCost, -cost);
+            Change(tag.tagResourceGain.ToString(), +gain);
+            Change(tag.tagResourceCost.ToString(), -cost);
         }
     }
 
-    void Change(Resource resource, int amount)
+    void Change(string resource, int amount)
     {
         switch (resource)
         {
-            case Resource.FOOD:            Food   = Math.Max(0, Food + amount); break;
-            case Resource.WATER:           Water  = Math.Max(0, Water + amount); break;
-            case Resource.HEALTHCONDITION: Health = Math.Clamp(Health + amount, 0, 20); break;
+            case "FOOD":            Food   = Math.Max(0, Food + amount); break;
+            case "WATER":           Water  = Math.Max(0, Water + amount); break;
+            case "HEALTHCONDITION": Health = Math.Clamp(Health + amount, 0, 20); break;
             // TODO: ITEM, WORLDEVENT, SPECIAL
-            // NONE: nothing happens
         }
     }
 

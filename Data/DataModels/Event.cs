@@ -1,5 +1,4 @@
-
-
+using Data.DataModels.Tags;
 namespace Data.DataModels;
 
 public class Event{
@@ -7,9 +6,9 @@ public class Event{
     // Properties of our event class
 
 
-    Guid EventId {get; set;}
-    string EventDescription {get; set;}
-    List<EventTag> Tags {get; set;}
-    List<EventOptions> Options {get; set;}
+    public Guid EventId {get; set;}
+    public string EventDescription {get; set;} = "";
+    public List<EventTag> Tags {get; set;} = [];
+    public List<EventOption> Options {get; set;} = [];
     
 }
