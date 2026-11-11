@@ -21,12 +21,18 @@
   font-size: 45px;
 }
 
-.buttons {
+.buttons a {
   display: flex;
-  flex-direction: column;
+  align-self: center;
+  font-size: 30px;
+  text-align: center;
 }
 
-#Button {
+#playButton,
+#tutButton,
+#credButton {
+  display: flex;
+  flex-direction: column;
   align-self: center;
   justify-self: center;
   width: 200px;
