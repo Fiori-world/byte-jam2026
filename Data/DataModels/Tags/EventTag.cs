@@ -6,7 +6,7 @@ public class EventTag : Tag
     // Review Tag Constructor for syntax
     public EventTag(string probabilityString, string qualityString, string resourceAffectedString) : base(probabilityString, qualityString)
     {
-        tagResourceAffected = (EventTag.ResourceAffected)(resourceAffectedString.ToUpper());
+        tagResourceAffected = Enum.Parse<ResourceAffected>(resourceAffectedString, ignoreCase: true);
     }
 
     public EventTag() : base()
