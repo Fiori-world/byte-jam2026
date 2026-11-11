@@ -1,9 +1,15 @@
-
+namespace Data.DataModels.Tags;
 public abstract class Tag
 {
 
+// Constructor for INHERTIANCE ONLY! Do not try to initialize a Tag Object
+    public Tag(string probabilityString, string qualityString)
+    {
+        // WARNING: NO VALIDATION. PARAMS MUST BE PERFECT
+        Probability = (Tag.Probability)(probabilityString.ToUpper);
+        Quality = (Tag.Probability)(qualityString.ToUpper);
 
-
+    }
     public enum Probability
     {
         COMMON, // (Tag.Probability)0;
@@ -20,6 +26,6 @@ public abstract class Tag
         INCREDIBLE // (Tag.Quality)4;
     };
 
-    // Constructor for INHERTIANCE ONLY! Do not try to initialize a Tag Object
+    
 
 }
