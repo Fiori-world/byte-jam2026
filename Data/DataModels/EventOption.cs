@@ -11,4 +11,5 @@ public class EventOption{
     public string OptionDescription {get; set;} = "";
     public List<OptionTag> Tags {get; set;} = [];
     
+
 }
