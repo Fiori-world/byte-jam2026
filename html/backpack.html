@@ -3,35 +3,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Backpack</title>
     <link rel="stylesheet" href="../css/backpack.css">
 </head>
 <body>
 
-    <h1>Backpack</h1>
+    <h1>Survival Backpack</h1>
+    <p class="subtitle">Check your supplies before leaving the bunker.</p>
 
     <div class="container">
 
         <div class="left">
-            <img src="backpack.png" alt="Backpack" class="backpack-img">
+            <img src="Bunker_Backpack.png" alt="Survival Backpack" class="backpack-img">
+            <p>Keep your backpack stocked. You never know what is outside.</p>
         </div>
 
         <div class="right">
             <h2>Supplies</h2>
 
-            <p>Rations: 10 (5 days)</p>
-            <p>Water: 10 (3 days worth)</p>
+            <h3>Food & Water</h3>
 
-            <h3>Items:</h3>
+            <div class="item">
+                <span>Rations</span>
+                <span>10 (5 days)</span>
+            </div>
 
-            <p>Radio (Functional)</p>
-            <p>Gas Mask (1/3 Uses Left)</p>
-            <p>Medicine</p>
+            <div class="item">
+                <span>Water</span>
+                <span>10 (3 days)</span>
+            </div>
 
-            <a href="bunker.html" class="back">Back</a>
+            <h3>Equipment</h3>
+
+            <div class="item">
+                <span>Radio</span>
+                <span class="good">Functional</span>
+            </div>
+
+            <div class="item">
+                <span>Gas Mask</span>
+                <span class="warning">1/3 Uses Left</span>
+            </div>
+
+            <div class="item">
+                <span>Medicine</span>
+                <span class="good">Available</span>
+            </div>
+
         </div>
 
     </div>
+
+    <a href="bunker.html" class="back">Back to Bunker</a>
 
 </body>
 </html>
