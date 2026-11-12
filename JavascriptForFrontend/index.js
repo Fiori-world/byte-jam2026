@@ -7,6 +7,11 @@ document.getElementById("playButton").onclick = async () => {
   }
 };
 
+document.getElementById("credButton")
+{
+  alert("Wasteland Warriors = Byte Jam 2026")
+};
+
 // TODO: make these pages
 document.getElementById("tutButton").onclick  = () => window.location.href = "tutorial.html";
 document.getElementById("credButton").onclick = () => window.location.href = "credits.html";

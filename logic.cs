@@ -76,7 +76,7 @@ class GameState
         };
     }
 
-    void Change(string resource, int amount)
+    public void Change(string resource, int amount)
     {
         switch (resource)
         {
