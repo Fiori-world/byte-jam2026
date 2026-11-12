@@ -3,6 +3,7 @@ using Data.DataModels;
 using Data.DataModels.Tags;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Allow the HTML frontend to call this API
@@ -33,6 +34,7 @@ class GameState
     public int Day { get; set; } = 1;
     public int Food { get; set; } = 10;
     public int Water { get; set; } = 10;
+    public int MaxHealth = 100;
     public int Health { get; set; } = 100;
     public const int MaxMorale = 50;
     public int Morale { get; set; } = 25;
@@ -52,41 +54,19 @@ class GameState
     }
 
     // The option's tags (from the database) decide how the stats change
-    public void Apply(EventOption option)
-    {
-        foreach (var tag in option.Tags)
-        {
-            // Better quality = gain more, lose less (TODO: tune these numbers)
-            int gain = (int)tag.tagQuality + 1;   // HORRIBLE 1 ... INCREDIBLE 5
-            int cost = 5 - (int)tag.tagQuality;   // HORRIBLE 5 ... INCREDIBLE 1
-            if (Morale < 12) gain = Math.Max(0, gain - 1);
-
-            Change(tag.tagResourceGain.ToString(), +gain);
-            Change(tag.tagResourceCost.ToString(), -cost);
-
-            Morale += tag.tagQuality switch
-            {
-                Tag.Quality.HORRIBLE => -8,
-                Tag.Quality.BAD => -3,
-                Tag.Quality.GOOD => +3,
-                Tag.Quality.INCREDIBLE => +8,
-                _                       => 0
-            };
-            Morale = Math.Clamp(Morale, 0, MaxMorale);
-        };
-    }
-
-    public void Change(string resource, int amount)
+    public void ChangeResource(string resource, int amount)
     {
         switch (resource)
         {
             case "FOOD":            Food   = Math.Max(0, Food + amount); break;
             case "WATER":           Water  = Math.Max(0, Water + amount); break;
-            case "HEALTHCONDITION": Health = Math.Clamp(Health + amount, 0, 100); break;
+            case "HEALTHCONDITION": Health = Math.Clamp(Health + amount, 0, MaxHealth); break;
             // TODO: ITEM, WORLDEVENT, SPECIAL
         }
     }
 
+    public void ChangeMorale(int amount) =>
+        Morale = Math.Clamp(Morale + amount, 0, MaxMorale);
     public void EndDay()
     {
         Day++;
