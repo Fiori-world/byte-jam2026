@@ -40,6 +40,8 @@ a {
   margin: 20px;
   border-radius: 15px;
   background-color: burlywood;
+  font-family: papyrus;
+  box-shadow: 0 12px 20px 0 black;
 }
 
 footer {
