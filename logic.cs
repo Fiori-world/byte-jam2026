@@ -80,6 +80,7 @@ public class GameState
             case "FOOD":            Food   = Math.Max(0, Food + amount); break;
             case "WATER":           Water  = Math.Max(0, Water + amount); break;
             case "HEALTHCONDITION": Health = Math.Clamp(Health + amount, 0, MaxHealth); break;
+            case "MORALE":          ChangeMorale(amount); break;
             // TODO: ITEM, WORLDEVENT, SPECIAL
         }
     }

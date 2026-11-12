@@ -3,7 +3,7 @@ const API = "http://localhost:5000/api";
 
 // Change the folder here once if the HTML files move
 function goTo(page) {
-  window.location.href = "/byte-jam/html/" + page;
+  window.location.href = "/byte-jam2026/html/" + page;
 }
 
 async function apiGet(path) {

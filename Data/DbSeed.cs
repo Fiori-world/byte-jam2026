@@ -11,6 +11,7 @@ public class DbSeed
         using var context = new GameDbContext(
             serviceProvider.GetRequiredService<
                 DbContextOptions<GameDbContext>>());
+        await context.Database.EnsureCreatedAsync();
 
     if (context == null || context.Events == null || context.EventOptions == null)
         {
@@ -33,15 +34,15 @@ public class DbSeed
         await context.Events.AddRangeAsync(
             new Event
             {
-                EventId = new Guid("2d64509a-e02d-4e7e-8cb7-c09b21aa4ab"),
+                EventId = Guid.NewGuid(),
                 EventDescription = "Event Rain Description",
-                Tags = {new EventTag("COMMON", "GREAT", "WATER")},
+                Tags = {new EventTag("COMMON", "GOOD", "WATER")},
                 Options = {1,2,3}
                 
             },
             new Event
             {
-                EventId = new Guid(""),
+                EventId = Guid.NewGuid(),
                 EventDescription = "",
                 Tags = {},
                 Options = {}

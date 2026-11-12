@@ -1,4 +1,6 @@
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Data.DataModels.Tags;
 public abstract class Tag
 {
@@ -6,6 +8,8 @@ public abstract class Tag
     // Class properties...
     public Probability tagProbability {get; set;}
     public Quality tagQuality {get; set;}
+    [Key]
+    public int TagId { get; set; }
 
     protected Tag()
     {
