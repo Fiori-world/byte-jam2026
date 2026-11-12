@@ -8,6 +8,23 @@ body {
   overflow: hidden;
 }
 
+.interactables button{
+  background-color: rgba(0, 0, 0, 0);
+  border:hidden;
+  position:absolute;
+}
+
+#journal{
+  top: 416px;
+  left: 440px;
+}
+
+#backpack{
+  top: 480px;
+  left: 210px;
+}
+
+
 #can1{
   max-width: 78px;
   height: 78px;
