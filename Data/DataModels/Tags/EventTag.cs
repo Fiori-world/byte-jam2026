@@ -23,9 +23,11 @@ public class EventTag : Tag
 
         HEALTHCONDITION, // (EventTag.ResourceAffected)3;
 
-        WORLDEVENT, // (EventTag.ResourceAffected)4;
+        MORALE, // (EventTag.ResourceAffected)4;
 
-        SPECIAL // (EventTag.ResourceAffected)5;
+        WORLDEVENT, // (EventTag.ResourceAffected)5;
+
+        SPECIAL // (EventTag.ResourceAffected)6;
 
     }
 

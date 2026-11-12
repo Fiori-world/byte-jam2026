@@ -28,9 +28,11 @@ public class OptionTag : Tag
 
         HEALTHCONDITION, // ((OptionTag.ResourceGain)3;
 
-        WORLDEVENT, // (OptionTag.ResourceGain)4;
+        MORALE, // (OptionTag.ResourceGain)4;
 
-        SPECIAL // (OptionTag.ResourceGain)5;
+        WORLDEVENT, // (OptionTag.ResourceGain)5;
+
+        SPECIAL // (OptionTag.ResourceGain)6;
 
     }
     public enum ResourceCost
@@ -42,9 +44,12 @@ public class OptionTag : Tag
         ITEM, // (OptionTag.ResourceCost)2;
 
         HEALTHCONDITION, // (OptionTag.ResourceCost)3;
-        WORLDEVENT, // (OptionTag.ResourceCost)4;
 
-        SPECIAL // (OptionTag.ResourceCost)5;
+        MORALE, // (OptionTag.ResourceCost)4;
+
+        WORLDEVENT, // (OptionTag.ResourceCost)5;
+
+        SPECIAL // (OptionTag.ResourceCost)6;
 
     }
 
