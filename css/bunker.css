@@ -7,3 +7,133 @@ body {
   background-attachment: fixed;
   overflow: hidden;
 }
+
+#can1{
+  max-width: 78px;
+  height: 78px;
+
+  position:absolute;
+  left: 900px;
+  top: 209px;
+}
+
+#can2{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 978px;
+  top: 209px;
+}
+
+#can3{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1056px;
+  top: 209px;
+}
+
+#can4{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1130px;
+  top: 209px;
+}
+
+#can5{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 900px;
+  top: 317px;
+
+}
+
+#can6{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 978px;
+  top: 317px;
+}
+
+#can7{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1056px;
+  top: 317px;
+}
+
+#can8{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1130px;
+  top: 317px;
+}
+
+#water1{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 900px;
+  top: px;
+}
+
+#water2{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 978px;
+  top: px;
+}
+
+#water3{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1056px;
+  top: px;
+}
+
+#water4{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1130px;
+  top: 207px;
+}
+
+#water5{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 900px;
+  top: px;
+}
+
+#water6{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 978px;
+  top: px;
+}
+
+#water7{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1056px;
+  top: px;
+}
+
+#water8{
+  max-width: 78px;
+  height: 78px;
+  position: absolute;
+  left: 1130px;
+  top: px;
+}
