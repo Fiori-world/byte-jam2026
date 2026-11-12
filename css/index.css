@@ -8,9 +8,9 @@
   font-size: 70px;
   border-radius: 10px;
   border-width: 10px;
-  border-style: groove;
-  border-color: black;
+  border: 4px ridge #82745d;
   margin: 0 auto;
+  color: #eee4d2;
 }
 
 #flavorText {
@@ -19,6 +19,7 @@
   justify-content: center;
   font-family: papyrus;
   font-size: 45px;
+  color: #c5bca9;
 }
 
 a {
@@ -39,7 +40,9 @@ a {
   height: 100px;
   margin: 20px;
   border-radius: 15px;
-  background-color: burlywood;
+  background-color: #514b3d;
+  font-family: papyrus;
+  box-shadow: 0 12px 20px 0 black;
 }
 
 footer {
@@ -50,15 +53,16 @@ footer {
 }
 
 body {
-  background-color: bisque;
+  background-color: #39382f;
 }
 
 a {
   text-decoration: none;
+  color: #e2caa4;
 }
 a:visited {
   text-decoration: none;
-  color: black;
+  color: #e2caa4;
 }
 a:hover {
   text-decoration: none;

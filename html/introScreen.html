@@ -6,10 +6,12 @@
     <title>Setup Your Playthrough</title>
     <script src="api.js" defer></script>
     <script src="introScreen.js" defer></script>
-    <link rel="stylesheet" href="/byte-jam2026/css/introScreen.css">
+    <link rel="stylesheet" href="/byte-jam2026/css/introScreen.css" />
   </head>
   <body>
-    <button><a href="/byte-jam2026/index.html">Main Menu</a></button>
+    <button class="mainMenu">
+      <a href="/byte-jam2026/index.html">&larr;Main Menu</a>
+    </button>
     <h1>Choose your difficulty!</h1>
     <div class="difficultyButtons">
       <button>Easy</button>
@@ -18,28 +20,37 @@
     </div>
 
     <div class="creditSelect">
-        <p id="credits">credits - xxx</p>
+      <p id="credits">Credits - xxx</p>
+      <div id="Rations">
         <p>Rations - 1 Credit</p>
         <button>+ 1 Rations</button>
         <button>- 1 Rations</button>
         <p>Water - 1 Credit</p>
         <button>+ 1 Water</button>
         <button>-1 Water</button>
-        <h2>Other Items: </h2>
+      </div>
+      <h2>Other Items:</h2>
+      <div id="explore">
         <p>Radio - 5 credits</p>
         <button>Take Radio</button>
         <p>Map - 3 credits</p>
         <button>Take Map</button>
+      </div>
+      <div id="safety">
         <p>Gas Mask - 2 credits</p>
         <button>Take Gas Mask</button>
         <p>Crowbar - 3 credits</p>
         <button>Take Crowbar</button>
+      </div>
+      <div id="medical">
         <p>First Aid Kit - 4 credits</p>
         <button>Take First Aid Kit</button>
         <p>Medicine - 2 credits</p>
         <button>Take Medicine</button>
-
-
+      </div>
+    </div>
+    <div id="startGame">
+      <button>Play</button>
     </div>
   </body>
 </html>
