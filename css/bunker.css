@@ -1,0 +1,9 @@
+body {
+  background-image: url(/byte-jam2026/assets/Bunker_Base.png);
+  aspect-ratio: 16 / 9;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+}

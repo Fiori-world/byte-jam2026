@@ -21,11 +21,11 @@
   font-size: 45px;
 }
 
-.buttons a {
-  display: flex;
-  align-self: center;
-  font-size: 30px;
+a {
+  display: inline-grid;
+  place-items: center; /* Centers both horizontally and vertically */
   text-align: center;
+  font-size: 40px;
 }
 
 #playButton,
@@ -43,9 +43,10 @@
 }
 
 footer {
-  align-items: end;
-  justify-items: end;
-  font-size: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 body {
