@@ -1,41 +1,54 @@
 
 body {
-    background-color: #39382f;
+    background-image: url("../html/Bunker_Backpack.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: Georgia, serif;
     color: #eee4d2;
     text-align: center;
     margin: 0;
     padding: 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 h1 {
     font-size: 55px;
     margin-bottom: 10px;
+    text-shadow: 2px 2px 5px #211e19;
 }
 
 .subtitle {
-    color: #c5bca9;
     font-size: 18px;
     margin-bottom: 40px;
+    text-shadow: 2px 2px 5px #211e19;
 }
 
 .container {
     display: flex;
     align-items: stretch;
-    justify-content: center;
     gap: 30px;
-    max-width: 1000px;
+    max-width: 1200px;
+    min-height: 600px;
     margin: auto;
+    padding: 30px;
+    background-color: rgba(81, 75, 61, 0.65);
+    border: 4px ridge #82745d;
+    border-radius: 30px;
+    box-shadow: 5px 8px 15px #25241e;
+    box-sizing: border-box;
 }
 
 .left, .right {
     flex: 1;
     min-width: 0;
-    background-color: #514b3d;
+    background-color: rgba(81, 75, 61, 0.9);
     border: 4px ridge #82745d;
     border-radius: 10px;
     padding: 25px;
-    box-shadow: 5px 8px 15px #25241e;
+    box-sizing: border-box;
 }
 
 .left {
@@ -48,6 +61,7 @@ h1 {
 .backpack-img {
     width: 350px;
     max-width: 100%;
+    height: auto;
     filter: drop-shadow(5px 10px 8px #29261f);
 }
 
@@ -84,10 +98,6 @@ h3 {
     text-align: left;
 }
 
-.item:hover {
-    background-color: #756a55;
-}
-
 .good {
     color: #c3d5a3;
 }
@@ -119,5 +129,6 @@ h3 {
 
     .container {
         flex-direction: column;
+        min-height: auto;
     }
 }
