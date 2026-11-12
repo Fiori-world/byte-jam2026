@@ -9,7 +9,7 @@ public class Event{
     public Guid EventId {get; set;}
     public string EventDescription {get; set;} = "";
     public List<EventTag> Tags {get; set;} = [];
-    public List<EventOption> Options {get; set;} = [];
+    public List<Guid> Options {get; set;} = [];
    
     
 }
