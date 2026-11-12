@@ -38,6 +38,7 @@ app.Use(async (context, next) =>
 app.MapIndexEndpoints();     // indexlogic.cs
 app.MapJournalEndpoints();   // journallogic.cs
 app.MapBunkerEndpoints();    // bunkerlogic.cs
+app.MapMirrorEndpoints();
 
 app.Run();
 
@@ -56,6 +57,8 @@ public class GameState
     public string Difficulty { get; set; } = "";
     public List<string> Items { get; set; } = [];
     public bool EventDoneToday { get; set; }
+    public bool ScavengedToday { get; set ;}
+    public bool BrushedToday { get; set; }
 
     public bool GameOver => Health <= 0;
 
@@ -70,6 +73,8 @@ public class GameState
         Items = [.. items];
         CurrentEventId = null;
         EventDoneToday = false;
+        ScavengedToday = false;
+        BrushedToday = false;
     }
 
     // The option's tags (from the database) decide how the stats change
@@ -83,6 +88,52 @@ public class GameState
             case "MORALE":          ChangeMorale(amount); break;
             // TODO: ITEM, WORLDEVENT, SPECIAL
         }
+    }
+
+    public string Scavenge()
+    {
+        ScavengedToday = true;
+        var rng = Random.Shared;
+        bool crowbar = Items.Contains("Crowbar");
+
+        int food = rng.Next(0, 3) + (crowbar ? 1 : 0);
+        int water = rng.Next(0, 3) + (crowbar ? 1 : 0);
+        if (Items.Contains("Map") && food + water == 0) food = 1;
+
+        ChangeResource("FOOD", food);
+        ChangeResource("WATER", water);
+        var result = $"You found {food} food and {water} water";
+
+        int danger = Difficulty switch { "Easy" => 25, "Hard" => 50, _ => 35};
+
+        if (Items.Contains("Radio")) danger -= 10;
+
+        if (rng.Next(100) < danger)
+        {
+            int damage = rng.Next(10, 26);
+            bool mask = Items.Contains("Gas Mask");
+            if (mask) damage /= 2;
+
+            ChangeResource("HEALTHCONDITION", -damage);
+            ChangeMorale(-2);
+
+            result += mask ? $" Toxic air other there, but the gas mask helped. -{damage} health" : $" Something out there hurt you. -{damage} health ";
+        }
+        return result;
+    }
+
+    public string? UseItem(string item)
+    {
+        if (!Items.Contains(item)) return null;
+        string result;
+        switch (item)
+        {
+            case "First Aid Kit": ChangeResource("HEALTHCONDITION", 40); result = "You patched yourself up. +40 health"; break;
+            case "Medicine": ChangeResource("HEALTHCONDITION", 20); ChangeMorale(2); result = "The medicine kicks in. +20 health, =2 morale."; break;
+            default: return null;
+        }
+        Items.Remove(item);
+        return result;
     }
 
     public void ChangeMorale(int amount) =>
@@ -110,6 +161,8 @@ public class GameState
 
         if (Morale == 0) Health = Math.Max(0, Health - 1);
 
+        ScavengedToday = false;
+        BrushedToday = false;
         EventDoneToday = false;
         CurrentEventId = null;
     }

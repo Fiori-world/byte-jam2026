@@ -28,5 +28,7 @@ static class IndexLogic
 
         // Current stats (any page can use this)
         game.MapGet("/state", (GameState state) => state);
+
+        
     }
 }
