@@ -30,13 +30,14 @@ app.UseCors();
 app.Use(async (context, next) =>
 {
    await next();
-   if (context.Request.Path.StartsWithSegments("api"))
+   if (context.Request.Path.StartsWithSegments("/api"))
     saveFile.Save(context.RequestServices.GetRequiredService<GameState>()); 
 });
 
 // Endpoints for each page
 app.MapIndexEndpoints();     // indexlogic.cs
 app.MapJournalEndpoints();   // journallogic.cs
+app.MapBunkerEndpoints();    // bunkerlogic.cs
 
 app.Run();
 
@@ -52,18 +53,23 @@ public class GameState
     public const int MaxMorale = 50;
     public int Morale { get; set; } = 25;
     public Guid? CurrentEventId { get; set; }
-    // TODO: Items list, active world events
+    public string Difficulty { get; set; } = "";
+    public List<string> Items { get; set; } = [];
+    public bool EventDoneToday { get; set; }
 
     public bool GameOver => Health <= 0;
 
-    public void Reset()
+    public void Reset(string difficulty, int food, int water, List<string> items)
     {
+        Difficulty = difficulty;
         Day = 1;
-        Food = 10;
-        Water = 10;
-        Health = 100;
+        Food = food;
+        Water = water;
+        Health = MaxHealth;
         Morale = 25;
+        Items = [.. items];
         CurrentEventId = null;
+        EventDoneToday = false;
     }
 
     // The option's tags (from the database) decide how the stats change
@@ -102,14 +108,24 @@ public class GameState
         Morale = Math.Clamp(Morale, 0, MaxMorale);
 
         if (Morale == 0) Health = Math.Max(0, Health - 1);
+
+        EventDoneToday = false;
+        CurrentEventId = null;
     }
 
-    public static class Shop
+    
+}
+
+
+public static class Shop
     {
         public const int RationPrice = 1;
         public const int WaterPrice = 1;
 
         public static readonly Dictionary<string, int> Credits = new() { ["Easy"] = 20, ["Medium"] = 15, ["Hard"] =10};
-        public static readonly 
+        public static readonly Dictionary<string, int> Prices = new() { ["Radio"] = 5, ["Map"] = 3, ["Gas Mask"] = 2, ["Crowbar"] = 3, ["First Aid Kit"] = 4, ["Medicine"] = 2 };
+
+        public static int Cost(NewGameRequest req) =>
+            req.Food * RationPrice + req.Water * WaterPrice + req.Items.Sum(i => Prices[i]);
     }
-}
+    public record NewGameRequest(string Difficulty, int Food, int Water, List<string> Items);

@@ -12,6 +12,7 @@ public class EventOption{
     public int OptionId {get; set;}
     public string OptionDescription {get; set;} = "";
     public List<OptionTag> Tags {get; set;} = [];
+    public string ResultDescription { get; set; } = "";
 
     public void ApplyTo(GameState state)
     {

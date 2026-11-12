@@ -1,12 +1,16 @@
 // Shared by every page: all calls to the C# backend go through here
 const API = "http://localhost:5000/api";
-const PAGE = "/byte-jam/html" + name;
 
-async function apiGet(path) {
-  return handle(await fetch(API + path))
+// Change the folder here once if the HTML files move
+function goTo(page) {
+  window.location.href = "/byte-jam/html/" + page;
 }
 
-async function apiPost(path) {
+async function apiGet(path) {
+  return handle(await fetch(API + path));
+}
+
+async function apiPost(path, body) {
   return handle(await fetch(API + path, {
     method: "POST",
     headers: body ? { "Content-Type": "application/json" } : {},
@@ -23,6 +27,12 @@ async function handle(res) {
   return data;
 }
 
-function statsText(s){
-  return `Day ${s.day} | Food ${s.day} | Water ${s.day} | Health ${s.day} | Health ${s.health}/20 | Morale ${s.morale}/50`;
+function statsText(s) {
+  return `Day ${s.day} | Food ${s.food} | Water ${s.water} | Health ${s.health}/100 | Morale ${s.morale}/50`;
 }
+
+document.querySelectorAll("button > a").forEach(a => {
+  a.parentElement.addEventListener("click", e => {
+    if (e.target !== a) a.click();
+  });
+});
