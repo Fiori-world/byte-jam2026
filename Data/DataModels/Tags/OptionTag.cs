@@ -18,6 +18,25 @@ public class OptionTag : Tag
         
     }
 
+    public void ApplyTo(GameState state)
+    {
+        int gain = (int)tagQuality +1;
+        int cost = 5 - (int)tagQuality;
+        if (state.Morale <12) gain = Math.Max(0, gain -1);
+        
+        state.ChangeResource(tagResourceGain.ToString(), +gain);
+        state.ChangeResource(tagResourceCost.ToString(), -cost);
+
+        state.ChangeMorale(tagQuality switch
+        {
+            Quality.HORRIBLE   => -8,
+            Quality.BAD        => -3,
+            Quality.GOOD       => +3,
+            Quality.INCREDIBLE => +8,
+            _                  => 0
+        });
+    }
+
     public enum ResourceGain
     {
         
@@ -53,4 +72,7 @@ public class OptionTag : Tag
 
     }
 
+    
+
 }
+

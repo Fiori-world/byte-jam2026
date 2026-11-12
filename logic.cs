@@ -16,10 +16,23 @@ builder.Services.AddDbContext<GameDbContext>(o => o.UseSqlite("Data Source=event
 builder.Services.AddScoped<IEventStore, DatabaseEventStore>();
 
 // One shared game state for every endpoint
-builder.Services.AddSingleton<GameState>();
+builder.Services.AddSingleton(saveFile.Load());
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+ 
+    await DbSeed.Initialize(services);
+}
 app.UseCors();
+
+app.Use(async (context, next) =>
+{
+   await next();
+   if (context.Request.Path.StartsWithSegments("api"))
+    saveFile.Save(context.RequestServices.GetRequiredService<GameState>()); 
+});
 
 // Endpoints for each page
 app.MapIndexEndpoints();     // indexlogic.cs
@@ -29,7 +42,7 @@ app.Run();
 
 
 // ---------- Game State ----------
-class GameState
+public class GameState
 {
     public int Day { get; set; } = 1;
     public int Food { get; set; } = 10;
@@ -72,11 +85,16 @@ class GameState
         Day++;
         Food  = Math.Max(0, Food - 1);
         Water = Math.Max(0, Water - 1);
-        if (Food == 0 || Water == 0)
+        if (Food == 0)
         { 
-            Health = Math.Max(0, Health - 2);
+            Health = Math.Max(0, Health - 20);
             Morale -= 3;
         } 
+        else if (Water == 0)
+        {
+            Health = Math.Max(0, Health -33);
+            Morale -= 5;
+        }
         else if (Food >= 5 && Water >= 5)
         {
             Morale += 1;
@@ -84,5 +102,14 @@ class GameState
         Morale = Math.Clamp(Morale, 0, MaxMorale);
 
         if (Morale == 0) Health = Math.Max(0, Health - 1);
+    }
+
+    public static class Shop
+    {
+        public const int RationPrice = 1;
+        public const int WaterPrice = 1;
+
+        public static readonly Dictionary<string, int> Credits = new() { ["Easy"] = 20, ["Medium"] = 15, ["Hard"] =10};
+        public static readonly 
     }
 }

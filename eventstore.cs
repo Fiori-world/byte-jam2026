@@ -7,6 +7,7 @@ interface IEventStore
 {
     Task<Event?> GetRandomEventAsync();
     Task<Event?> GetEventAsync(Guid id);
+    Task<List<EventOption>> GetOptionsAsync(Event ev);
 }
 
 class DatabaseEventStore(GameDbContext db) : IEventStore
@@ -36,7 +37,13 @@ class DatabaseEventStore(GameDbContext db) : IEventStore
 
     // Loads the event with its tags, its options, and each option's tags
     public Task<Event?> GetEventAsync(Guid id) =>
-        db.Events.Include(e => e.Tags)
-                 .Include(e => e.Options).ThenInclude(o => o.Tags)
-                 .FirstOrDefaultAsync(e => e.EventId == id);
+        db.Events.Include(e => e.Tags).FirstOrDefaultAsync(e => e.EventId == id);
+
+    public async Task<List<EventOption>> GetOptionsAsync(Event ev)
+    {
+        var found = await db.EventOptions.Include(o => o.Tags).Where(o => ev.Options.Contains(o.OptionId)).ToListAsync();
+        return ev.Options.Select(id => found.FirstOrDefault(o => o.OptionId == id)).OfType<EventOption>().ToList();
+    }
 }
+
+

@@ -33,8 +33,7 @@ static class JournalLogic
             var option = ev?.Options.FirstOrDefault(o => o.OptionId == slot);
             if (option is null) return Results.BadRequest("Invalid choice.");
 
-            // state.ApplyTo(option); Will uncomment when we have the fixes for the database
-            state.EndDay();
+            option.ApplyTo(state);
             state.CurrentEventId = null;
 
             return Results.Ok(new { Result = "TODO: no result text in the database yet", state });
