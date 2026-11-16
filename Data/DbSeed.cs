@@ -53,12 +53,27 @@ public class DbSeed
                 OptionDescription = "Catch some rain with some bottles!",
                 Tags = {new OptionTag("COMMON", "GOOD", "WATER", "NONE")},
                 ResultDescription = "You caught 2 extra bottles of water from the rain!",
-                Value = [2, -1]
+                Value = [2, 0]
             },
             new EventOption 
             {
-                
+                EventId = Guid.Parse("a200b500-6027-424c-918f-81a6963f6b02"),
+                OptionId = 1,
+                OptionDescription = "Open your mouth and go aaaaaaaaaaaaaaaaaaa",
+                Tags = {new OptionTag("COMMON", "GOOD", "MORALE", "NONE")},
+                ResultDescription = "You didn't get any water from that- but it made you feel like a kid again, and that morale will keep you going!",
+                Value = [20, 0]
+            },
+            new EventOption 
+            {
+                EventId = Guid.Parse("a200b500-6027-424c-918f-81a6963f6b02"),
+                OptionId = 1,
+                OptionDescription = "Take a natural shower!",
+                Tags = {new OptionTag("COMMON", "GOOD", "HEALTHCONDITION", "NONE")},
+                ResultDescription = "You rinsed off with some rainwater... you feel squeaky clean! \n You were just standing outside though. Hope nobody was watching!",
+                Value = [25, 0]
             });
+
         
         await context.SaveChangesAsync();
     }
