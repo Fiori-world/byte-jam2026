@@ -132,4 +132,10 @@ body {
 
 .mainMenu a {
   color: #e2caa4;
+  text-decoration: none;
+}
+
+#startGame a{
+  color:#e2caa4 ;
+  text-decoration: none;
 }

@@ -1,0 +1,25 @@
+body{
+    font-family: papyrus;
+    background-color: #39382f;
+    color: #eee4d2;
+}
+
+button{
+    border-radius: 15px;
+    background-color: #514b3d;
+    color: #eee4d2;
+    width: 150px;
+    height: 30px;
+    border: hidden;
+    box-shadow: 0 12px 24px 0 black;
+}
+
+a{
+    text-decoration: none;
+    color: #e2caa4;
+}
+
+a:visited{
+    text-decoration: none;
+    color: #e2caa4;
+}
