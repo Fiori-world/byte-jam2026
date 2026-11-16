@@ -8,6 +8,8 @@ static class JournalLogic
         // Get the current event, or roll a new one if there isn't one
         journal.MapGet("/event", async (IEventStore store, GameState state) =>
         {
+            if (state.GameOver) return Results.BadRequest("Game over.");
+
             // Refreshing the page shows the same event instead of rerolling
             var ev = state.CurrentEventId is Guid id
                 ? await store.GetEventAsync(id)
@@ -35,6 +37,7 @@ static class JournalLogic
         // Player confirms their choice, and we return the result of that choice
         journal.MapPost("/choose/{slot:int}", async (int slot, IEventStore store, GameState state) =>
         {
+            if (state.GameOver) return Results.BadRequest("Game over.");
             if (state.CurrentEventId is not Guid id) return Results.BadRequest("No active event.");
 
             var ev = await store.GetEventAsync(id);

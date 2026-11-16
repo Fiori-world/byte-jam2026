@@ -49,7 +49,7 @@ public class GameState
     public int Day { get; set; } = 1;
     public int Food { get; set; } = 10;
     public int Water { get; set; } = 10;
-    public int MaxHealth = 100;
+    public const int MaxHealth = 100;
     public int Health { get; set; } = 100;
     public const int MaxMorale = 50;
     public int Morale { get; set; } = 25;
@@ -102,7 +102,7 @@ public class GameState
 
         ChangeResource("FOOD", food);
         ChangeResource("WATER", water);
-        var result = $"You found {food} food and {water} water";
+        var result = $"You found {food} food and {water} water.";
 
         int danger = Difficulty switch { "Easy" => 25, "Hard" => 50, _ => 35};
 
@@ -117,7 +117,7 @@ public class GameState
             ChangeResource("HEALTHCONDITION", -damage);
             ChangeMorale(-2);
 
-            result += mask ? $" Toxic air other there, but the gas mask helped. -{damage} health" : $" Something out there hurt you. -{damage} health ";
+            result += mask ? $" Toxic air out there, but the gas mask helped. -{damage} health." : $" Something out there hurt you. -{damage} health.";
         }
         return result;
     }
@@ -128,7 +128,7 @@ public class GameState
         string result;
         switch (item)
         {
-            case "First Aid Kit": ChangeResource("HEALTHCONDITION", 40); result = "You patched yourself up. +40 health"; break;
+            case "First Aid Kit": ChangeResource("HEALTHCONDITION", 40); result = "You patched yourself up. +40 health."; break;
             case "Medicine": ChangeResource("HEALTHCONDITION", 20); ChangeMorale(2); result = "The medicine kicks in. +20 health, +2 morale."; break;
             default: return null;
         }
