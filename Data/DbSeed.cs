@@ -42,6 +42,14 @@ public class DbSeed
             },
             new Event
             {
+                EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
+                EventDescription = "Humans are social creatures. And being alone for a long time- isn't exactly great for your mental. \n So of course when I heard someone else talking I was excited to start a conversation...! Until I realized I was still alone.",
+                Tags = {new EventTag("UNCOMMON", "BAD", "MORALE")},
+                Options = {1,2,3}
+            },
+
+            new Event
+            {
                 
             });
 
@@ -72,6 +80,33 @@ public class DbSeed
                 Tags = {new OptionTag("COMMON", "GOOD", "HEALTHCONDITION", "NONE")},
                 ResultDescription = "You rinsed off with some rainwater... you feel squeaky clean! \n You were just standing outside though. Hope nobody was watching!",
                 Value = [25, 0]
+            },
+            new EventOption
+            {
+                EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
+                OptionId = 1,
+                OptionDescription = "I'm alone. Best to aknowledge that than pretend there's someone else here.",
+                Tags = {new OptionTag("UNCOMMON", "GOOD", "NONE", "MORALE")},
+                ResultDescription = "You accept the solumn reality of your situation. You're alone. The world you know is gone and you just have to survive until things can go back to normal. \n ...That didn't make you feel any better- well- worse actually, but it's the truth. Better to stay grounded in something sad than delude yourself.",
+                Value = [0, -20]
+            },
+            new EventOption 
+            {
+                EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
+                OptionId = 2,
+                OptionDescription = "Distract myself from this nightmare by stress eating!!!",
+                Tags = {new OptionTag("UNCOMMON", "GOOD", "MORALE", "FOOD")},
+                ResultDescription = "You decide to drown your sorrows in a tin can. You savor every bite, drowning out the maddening thoughts with savory tomato basil. \n That throws off your rationing plan a bit- but the voices are quiet again... for now.",
+                Value = [5, -1]
+            },
+            new EventOption 
+            {
+                EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
+                OptionId = 3,
+                OptionDescription = "I'm not crazy! I'm fine! Everything is fine!",
+                Tags = {new OptionTag("UNCOMMON", "BAD", "MORALE", "HEALTHCONDITION")},
+                ResultDescription = "You decide to tell yourself that everything is fine, actually. And that nothing about this is concerning whatsoever. Ignorance is bliss right? \n You actually manage to buy your own boldface lie, but the nerves won't go away. Your heart is racing and your head hurts. This much stress isn't good for your health, but you're still convinced that everything is JUST FINE!!!",
+                Value = [10, -10]
             });
 
         
