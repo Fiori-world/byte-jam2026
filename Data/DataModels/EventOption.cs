@@ -19,5 +19,6 @@ public class EventOption{
         foreach (var tag in Tags)
             tag.ApplyTo(state);
     }
+
     
 }

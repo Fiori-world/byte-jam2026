@@ -129,7 +129,7 @@ public class GameState
         switch (item)
         {
             case "First Aid Kit": ChangeResource("HEALTHCONDITION", 40); result = "You patched yourself up. +40 health"; break;
-            case "Medicine": ChangeResource("HEALTHCONDITION", 20); ChangeMorale(2); result = "The medicine kicks in. +20 health, =2 morale."; break;
+            case "Medicine": ChangeResource("HEALTHCONDITION", 20); ChangeMorale(2); result = "The medicine kicks in. +20 health, +2 morale."; break;
             default: return null;
         }
         Items.Remove(item);

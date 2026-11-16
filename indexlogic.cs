@@ -29,6 +29,11 @@ static class IndexLogic
         // Current stats (any page can use this)
         game.MapGet("/state", (GameState state) => state);
 
-        
+        game.MapPost("/use/{item}", (string item, GameState state) =>
+        {
+           if (state.GameOver) return Results.BadRequest("Game over.");
+           var result = state.UseItem(item);
+           return result is null ? Results.BadRequest($"You can't use {item}.") : Results.Ok(new { Result = result, state}); 
+        });
     }
 }
