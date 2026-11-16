@@ -7,3 +7,6 @@ obj/
 gamestate.json
 gamestate.json.tmp
 .DS_Store
+
+saves/
+publish/

@@ -1,0 +1,14 @@
+# Files Docker should never copy into the build (local builds, saves, database, editor stuff)
+bin/
+obj/
+saves/
+gamestate.json
+gamestate.json.tmp
+events.db
+events.db-shm
+events.db-wal
+.git/
+.vscode/
+.vs/
+**/.DS_Store
+publish/

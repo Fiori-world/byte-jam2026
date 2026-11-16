@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play on Your Phone</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        background-color: #39382f;
+        color: #e2caa4;
+        font-family: papyrus, serif;
+        text-align: center;
+      }
+      h1 { margin: 0; font-size: 44px; }
+      #qr {
+        padding: 16px;
+        background: #fff; /* QR codes need a light background to scan */
+        border: 4px ridge #82745d;
+        border-radius: 10px;
+      }
+      #url { font-family: monospace; font-size: 20px; color: #eee4d2; }
+      p { margin: 0; max-width: 520px; font-size: 18px; color: #c5bca9; }
+      a { color: #e2caa4; }
+    </style>
+  </head>
+  <body>
+    <h1>Play on Your Phone</h1>
+    <div id="qr"></div>
+    <div id="url"></div>
+    <p>Scan with your phone's camera to open the game.</p>
+    <p>Turn your phone sideways for the best view.</p>
+    <a href="../index.html">&larr; Main Menu</a>
+
+    <script>
+      // The QR code points to the main menu of whatever site this page is on,
+      // so it's right wherever the game is hosted (no setup needed).
+      const gameUrl = new URL("../index.html", location.href).href.replace(/index\.html$/, "");
+      document.getElementById("url").textContent = gameUrl;
+      new QRCode(document.getElementById("qr"), { text: gameUrl, width: 256, height: 256 });
+    </script>
+  </body>
+</html>

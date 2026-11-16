@@ -2,9 +2,19 @@ using Data;
 using Data.DataModels;
 using Data.DataModels.Tags;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Port: hosting services tell the app which port to use (PORT, or ASPNETCORE_URLS / _HTTP_PORTS,
+// which ASP.NET reads by itself). With none of those set (running on your PC), use 5000.
+var hostPort = Environment.GetEnvironmentVariable("PORT");
+if (hostPort is not null)
+    builder.WebHost.UseUrls($"http://0.0.0.0:{hostPort}");
+else if (Environment.GetEnvironmentVariable("ASPNETCORE_URLS") is null &&
+         Environment.GetEnvironmentVariable("ASPNETCORE_HTTP_PORTS") is null)
+    builder.WebHost.UseUrls("http://localhost:5000");
 
 // Allow the HTML frontend to call this API
 builder.Services.AddCors(o => o.AddDefaultPolicy(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
@@ -15,8 +25,12 @@ builder.Services.AddDbContext<GameDbContext>(o => o.UseSqlite("Data Source=event
 // Where events come from (Scoped because it uses the database)
 builder.Services.AddScoped<IEventStore, DatabaseEventStore>();
 
-// One shared game state for every endpoint
-builder.Services.AddSingleton(saveFile.Load());
+// Every player (device) has their own game (see gamestore.cs).
+// Endpoints still just ask for "GameState" and get the game of whoever sent the request.
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<GameStore>();
+builder.Services.AddScoped(sp => sp.GetRequiredService<GameStore>()
+    .For(GameStore.PlayerId(sp.GetRequiredService<IHttpContextAccessor>().HttpContext)));
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -30,9 +44,25 @@ app.UseCors();
 app.Use(async (context, next) =>
 {
    await next();
+   // After any game request, save that player's game
    if (context.Request.Path.StartsWithSegments("/api"))
-    saveFile.Save(context.RequestServices.GetRequiredService<GameState>()); 
+    context.RequestServices.GetRequiredService<GameStore>().Save(GameStore.PlayerId(context));
 });
+
+// Serve the game's pages from this same server, so one address runs everything.
+// Only these folders are shared: never the code, the save file or the database.
+var root = app.Environment.ContentRootPath;
+foreach (var folder in new[] { "html", "css", "javascript", "assets" })
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(root, folder)),
+        RequestPath = "/" + folder
+    });
+app.MapGet("/", () => Results.File(Path.Combine(root, "index.html"), "text/html"));
+app.MapGet("/index.html", () => Results.File(Path.Combine(root, "index.html"), "text/html"));
+
+// QR code page: open <your site>/qr and scan it to play on a phone
+app.MapGet("/qr", () => Results.Redirect("/html/qr.html"));
 
 // Endpoints for each page
 app.MapIndexEndpoints();     // indexlogic.cs

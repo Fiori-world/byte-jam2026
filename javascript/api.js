@@ -1,5 +1,27 @@
 // Shared by every page: all calls to the C# backend go through here
-const API = "http://localhost:5000/api";
+// The backend serves the pages too, so the API is on the same site ("/api") — wherever it's hosted.
+// Live Server (port 5500) is only for local testing; there the backend runs separately on port 5000.
+const API = location.port === "5500"
+  ? `${location.protocol}//${location.hostname}:5000/api`
+  : "/api";
+
+// Each device gets its own game: a random id, made once and kept in this browser,
+// is sent with every request so the backend knows whose game it is.
+const PLAYER_ID = (() => {
+  const makeId = () => crypto.randomUUID
+    ? crypto.randomUUID()
+    : [...crypto.getRandomValues(new Uint8Array(16))].map(b => b.toString(16).padStart(2, "0")).join("");
+  try {
+    let id = localStorage.getItem("playerId");
+    if (!id) {
+      id = makeId();
+      localStorage.setItem("playerId", id);
+    }
+    return id;
+  } catch {
+    return makeId();   // browser blocks storage: the game can't be remembered between pages
+  }
+})();
 
 // Go to another page. Every page that calls this is in html/, so a relative name works
 function goTo(page) {
@@ -7,13 +29,15 @@ function goTo(page) {
 }
 
 async function apiGet(path) {
-  return handle(await fetch(API + path));
+  return handle(await fetch(API + path, { headers: { "X-Player-Id": PLAYER_ID } }));
 }
 
 async function apiPost(path, body) {
+  const headers = { "X-Player-Id": PLAYER_ID };
+  if (body) headers["Content-Type"] = "application/json";
   return handle(await fetch(API + path, {
     method: "POST",
-    headers: body ? { "Content-Type": "application/json" } : {},
+    headers,
     body: body ? JSON.stringify(body) : undefined
   }));
 }

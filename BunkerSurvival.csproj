@@ -10,4 +10,14 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
   </ItemGroup>
 
+  <!-- The game's pages: copied into the published build so the host can serve them -->
+  <ItemGroup>
+    <Content Include="index.html;html\**;css\**;javascript\**;assets\**" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- Never ship local saves or editor settings (each server starts its own) -->
+  <ItemGroup>
+    <Content Update="gamestate.json;gamestate.json.tmp;saves\**;.vscode\**" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
 </Project>
