@@ -46,7 +46,8 @@ static class JournalLogic
             // Snapshot stats so we can tell the player what changed
             var (food, water, health, morale) = (state.Food, state.Water, state.Health, state.Morale);
 
-            options[slot - 1].ApplyTo(state);
+            var option = options[slot - 1];
+            option.ApplyTo(state);
             state.CurrentEventId = null;
             state.EventDoneToday = true;
 

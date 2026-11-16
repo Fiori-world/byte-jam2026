@@ -13,12 +13,17 @@ public class EventOption{
     public string OptionDescription {get; set;} = "";
     public List<OptionTag> Tags {get; set;} = [];
     public string ResultDescription { get; set; } = "";
-    public int[] Value {get; set;}
+    public int[] Value {get; set;} = [];
 
     public void ApplyTo(GameState state)
     {
-        foreach (var tag in Tags)
-            tag.ApplyTo(state);
+        var tags = Tags.OrderBy(t => t.TagId).ToList();
+
+        for (int i = 0; i < tags.Count; i++)
+        {
+            int? gain = Value.Length > i * 2 ? Value[i * 2] : null;
+            int ? cost = Value.Length > i* 2 + 1 ? Value[i * 2 + 1] : null;
+        }
     }
 
     
