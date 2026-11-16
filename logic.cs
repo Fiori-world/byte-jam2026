@@ -58,11 +58,10 @@ foreach (var folder in new[] { "html", "css", "javascript", "assets" })
         FileProvider = new PhysicalFileProvider(Path.Combine(root, folder)),
         RequestPath = "/" + folder
     });
-app.MapGet("/", () => Results.File(Path.Combine(root, "index.html"), "text/html"));
-app.MapGet("/index.html", () => Results.File(Path.Combine(root, "index.html"), "text/html"));
-
-// QR code page: open <your site>/qr and scan it to play on a phone
+// The site's address opens the QR code page; the game itself starts at /index.html (the main menu)
+app.MapGet("/", () => Results.Redirect("/html/qr.html"));
 app.MapGet("/qr", () => Results.Redirect("/html/qr.html"));
+app.MapGet("/index.html", () => Results.File(Path.Combine(root, "index.html"), "text/html"));
 
 // Endpoints for each page
 app.MapIndexEndpoints();     // indexlogic.cs

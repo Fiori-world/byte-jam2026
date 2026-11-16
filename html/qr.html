@@ -37,12 +37,13 @@
     <div id="url"></div>
     <p>Scan with your phone's camera to open the game.</p>
     <p>Turn your phone sideways for the best view.</p>
-    <a href="../index.html">&larr; Main Menu</a>
+    <a href="../index.html">Play on this device &rarr;</a>
 
     <script>
-      // The QR code points to the main menu of whatever site this page is on,
-      // so it's right wherever the game is hosted (no setup needed).
-      const gameUrl = new URL("../index.html", location.href).href.replace(/index\.html$/, "");
+      // The QR code points to the game's main menu on whatever site this page is on,
+      // so it's right wherever the game is hosted (no setup needed). It has to be
+      // /index.html, not the site's plain address, because that opens this QR page.
+      const gameUrl = new URL("../index.html", location.href).href;
       document.getElementById("url").textContent = gameUrl;
       new QRCode(document.getElementById("qr"), { text: gameUrl, width: 256, height: 256 });
     </script>
