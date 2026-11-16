@@ -90,22 +90,47 @@ public class GameState
         }
     }
 
-    public string Scavenge()
+    public static readonly Dictionary<string, string> Locations = new()
+    {
+        ["gasStation"] = "gas station",
+        ["office"]     = "office",
+        ["lake"]       = "lake"
+    };
+
+    // Go outside once a day. Without a map you end up somewhere random.
+    public string Scavenge(string location)
     {
         ScavengedToday = true;
         var rng = Random.Shared;
-        bool crowbar = Items.Contains("Crowbar");
+        var result = "";
 
-        int food = rng.Next(0, 3) + (crowbar ? 1 : 0);
-        int water = rng.Next(0, 3) + (crowbar ? 1 : 0);
-        if (Items.Contains("Map") && food + water == 0) food = 1;
+        if (!Items.Contains("Map"))
+        {
+            var picked = Locations.Keys.ElementAt(rng.Next(Locations.Count));
+            if (picked != location) result += $"Without a map you got lost and ended up at the {Locations[picked]}. ";
+            location = picked;
+        }
+
+        int food = 0, water = 0, danger;
+        switch (location)
+        {
+            case "gasStation": food = rng.Next(1, 4); water = rng.Next(0, 2); danger = 40; break;
+            case "office":     food = rng.Next(0, 2); water = rng.Next(0, 2); danger = 20; break;
+            default:           water = rng.Next(2, 5);                        danger = 30; break;   // lake
+        }
+        if (Items.Contains("Crowbar")) { food++; water++; }
 
         ChangeResource("FOOD", food);
         ChangeResource("WATER", water);
-        var result = $"You found {food} food and {water} water.";
+        result += $"You found {food} food and {water} water.";
 
-        int danger = Difficulty switch { "Easy" => 25, "Hard" => 50, _ => 35};
+        if (location == "office" && !Items.Contains("Medicine") && rng.Next(100) < 30)
+        {
+            Items.Add("Medicine");
+            result += " You also found some medicine in a desk drawer!";
+        }
 
+        danger += Difficulty switch { "Easy" => -10, "Hard" => 15, _ => 0 };
         if (Items.Contains("Radio")) danger -= 10;
 
         if (rng.Next(100) < danger)
@@ -113,15 +138,13 @@ public class GameState
             int damage = rng.Next(10, 26);
             bool mask = Items.Contains("Gas Mask");
             if (mask) damage /= 2;
-
             ChangeResource("HEALTHCONDITION", -damage);
             ChangeMorale(-2);
-
-            result += mask ? $" Toxic air out there, but the gas mask helped. -{damage} health." : $" Something out there hurt you. -{damage} health.";
+            result += mask ? $" Toxic air out there, but the gas mask helped. -{damage} health."
+                           : $" Something out there hurt you. -{damage} health.";
         }
         return result;
     }
-
     public string? UseItem(string item)
     {
         if (!Items.Contains(item)) return null;

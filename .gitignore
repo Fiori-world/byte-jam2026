@@ -6,3 +6,4 @@ obj/
 .vs/
 gamestate.json
 gamestate.json.tmp
+.DS_Store

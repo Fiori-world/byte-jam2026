@@ -66,7 +66,7 @@ public class DbSeed
             new EventOption 
             {
                 EventId = Guid.Parse("a200b500-6027-424c-918f-81a6963f6b02"),
-                OptionId = 1,
+                OptionId = 2,
                 OptionDescription = "Open your mouth and go aaaaaaaaaaaaaaaaaaa",
                 Tags = {new OptionTag("COMMON", "GOOD", "MORALE", "NONE")},
                 ResultDescription = "You didn't get any water from that- but it made you feel like a kid again, and that morale will keep you going!",
@@ -75,7 +75,7 @@ public class DbSeed
             new EventOption 
             {
                 EventId = Guid.Parse("a200b500-6027-424c-918f-81a6963f6b02"),
-                OptionId = 1,
+                OptionId = 3,
                 OptionDescription = "Take a natural shower!",
                 Tags = {new OptionTag("COMMON", "GOOD", "HEALTHCONDITION", "NONE")},
                 ResultDescription = "You rinsed off with some rainwater... you feel squeaky clean! \n You were just standing outside though. Hope nobody was watching!",
@@ -84,7 +84,7 @@ public class DbSeed
             new EventOption
             {
                 EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
-                OptionId = 1,
+                OptionId = 4,
                 OptionDescription = "I'm alone. Best to aknowledge that than pretend there's someone else here.",
                 Tags = {new OptionTag("UNCOMMON", "GOOD", "NONE", "MORALE")},
                 ResultDescription = "You accept the solumn reality of your situation. You're alone. The world you know is gone and you just have to survive until things can go back to normal. \n ...That didn't make you feel any better- well- worse actually, but it's the truth. Better to stay grounded in something sad than delude yourself.",
@@ -93,7 +93,7 @@ public class DbSeed
             new EventOption 
             {
                 EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
-                OptionId = 2,
+                OptionId = 5,
                 OptionDescription = "Distract myself from this nightmare by stress eating!!!",
                 Tags = {new OptionTag("UNCOMMON", "GOOD", "MORALE", "FOOD")},
                 ResultDescription = "You decide to drown your sorrows in a tin can. You savor every bite, drowning out the maddening thoughts with savory tomato basil. \n That throws off your rationing plan a bit- but the voices are quiet again... for now.",
@@ -102,7 +102,7 @@ public class DbSeed
             new EventOption 
             {
                 EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
-                OptionId = 3,
+                OptionId = 6,
                 OptionDescription = "I'm not crazy! I'm fine! Everything is fine!",
                 Tags = {new OptionTag("UNCOMMON", "BAD", "MORALE", "HEALTHCONDITION")},
                 ResultDescription = "You decide to tell yourself that everything is fine, actually. And that nothing about this is concerning whatsoever. Ignorance is bliss right? \n You actually manage to buy your own boldface lie, but the nerves won't go away. Your heart is racing and your head hurts. This much stress isn't good for your health, but you're still convinced that everything is JUST FINE!!!",

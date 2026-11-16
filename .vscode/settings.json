@@ -1,0 +1,10 @@
+{
+  "liveServer.settings.ignoreFiles": [
+    "**/gamestate.json",
+    "**/gamestate.json.tmp",
+    "**/events.db*",
+    "**/bin/**",
+    "**/obj/**",
+    "**/*.cs"
+  ]
+}

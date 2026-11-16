@@ -1,0 +1,58 @@
+body{
+    background-image: url("../assets/Wasteland.png");
+    overflow: hidden;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    font-family: papyrus;
+    color: #e2caa4;
+
+}
+
+img{
+    display: flex;
+    justify-self: right;
+    height: 600px;
+}
+
+#gasStation{
+    border: hidden;
+    position: absolute;
+    top: 390px;
+    left: 840px;
+    background:#39382f;
+    color: #e2caa4; 
+}
+
+#home{
+    border: hidden;
+    position: absolute;
+    top: 470px;
+    left: 1040px;
+    background:#39382f;
+    color: #e2caa4;
+}
+#home a{
+    text-decoration: none;
+    color: #e2caa4;
+}
+#office{
+    border: hidden;
+    position: absolute;
+    top: 380px;
+    right: 210px;
+    background:#39382f;
+    color: #e2caa4;
+}
+
+#lake{
+    border: hidden;
+    position: absolute;
+    top: 560px;
+    right: 210px;
+    background:#39382f;
+    color: #e2caa4;
+
+}

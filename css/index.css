@@ -1,0 +1,69 @@
+.titleBox {
+  text-align: center;
+}
+
+#title {
+  display: inline-block;
+  font-family: papyrus;
+  font-size: 70px;
+  border-radius: 10px;
+  border-width: 10px;
+  border: 4px ridge #82745d;
+  margin: 0 auto;
+  color: #eee4d2;
+}
+
+#flavorText {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-family: papyrus;
+  font-size: 45px;
+  color: #c5bca9;
+}
+
+a {
+  display: inline-grid;
+  place-items: center; /* Centers both horizontally and vertically */
+  text-align: center;
+  font-size: 40px;
+}
+
+#playButton,
+#tutButton,
+#credButton {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  width: 200px;
+  height: 100px;
+  margin: 20px;
+  border-radius: 15px;
+  background-color: #514b3d;
+  font-family: papyrus;
+  box-shadow: 0 12px 20px 0 black;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+body {
+  background-color: #39382f;
+}
+
+a {
+  text-decoration: none;
+  color: #e2caa4;
+}
+a:visited {
+  text-decoration: none;
+  color: #e2caa4;
+}
+a:hover {
+  text-decoration: none;
+}

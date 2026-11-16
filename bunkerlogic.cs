@@ -18,11 +18,12 @@ static class BunkerLogic
         });
 
         // Hatch: scavenge once per day
-        bunker.MapPost("/scavenge", (GameState state) =>
+        bunker.MapPost("/scavenge/{location}", (string location, GameState state) =>
         {
             if (state.GameOver) return Results.BadRequest("Game over.");
+            if (!GameState.Locations.ContainsKey(location)) return Results.BadRequest("Unknown location.");
             if (state.ScavengedToday) return Results.Conflict("You've already been outside today. Sleep first.");
-            return Results.Ok(new { Result = state.Scavenge(), state });
+            return Results.Ok(new { Result = state.Scavenge(location), state });
         });
     }
 }
