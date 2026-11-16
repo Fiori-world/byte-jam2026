@@ -46,16 +46,21 @@ confirmButton.onclick = async () => {
   if (!selectedSlot) return;
   try {
     const r = await apiPost(`/journal/choose/${selectedSlot}`);
-    resultEl.textContent = r.result;
     optionButtons.forEach(b => b.disabled = true);   // event is used up
     confirmButton.hidden = true;
-    // TODO: show stats (r.state.day, r.state.food, r.state.water, r.state.health)
-    // TODO: if r.state.gameOver → go to a game over page
-    // TODO: decide how the next event loads (button, timer, or back to bunker)
+
+    if (r.state.gameOver) {
+      resultEl.textContent = `${r.result}. You didn't survive...`;
+      return;   // TODO: game over page
+    }
+    resultEl.textContent = `${r.result}. That's all for today, so sleep in the bunker.`;
+    // TODO: show statsText(r.state) somewhere if journal.html gets a stats element
   } catch (err) {
     resultEl.textContent = err.message;
   }
 };
+
+document.getElementById("backButton").onclick = () => goTo("bunker.html");
 
 document.getElementById("backButton").onclick = () => {
   window.location.href = "events.html";   // TODO: change to your bunker page
