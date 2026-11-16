@@ -34,7 +34,7 @@ public class DbSeed
         await context.Events.AddRangeAsync(
             new Event
             {
-                EventId = Guid.NewGuid(),
+                EventId = Guid.Parse("a200b500-6027-424c-918f-81a6963f6b02"),
                 EventDescription = "Event Rain Description",
                 Tags = {new EventTag("COMMON", "GOOD", "WATER")},
                 Options = {1,2,3}
@@ -42,16 +42,18 @@ public class DbSeed
             },
             new Event
             {
-                EventId = Guid.NewGuid(),
-                EventDescription = "",
-                Tags = {},
-                Options = {}
+                
             });
 
         await context.EventOptions.AddRangeAsync(
             new EventOption
             {
-                
+                EventId = Guid.Parse("a200b500-6027-424c-918f-81a6963f6b02"),
+                OptionId = 1,
+                OptionDescription = "Catch some rain with some bottles!",
+                Tags = {new OptionTag("COMMON", "GOOD", "WATER", "NONE")},
+                ResultDescription = "You caught 2 extra bottles of water from the rain!",
+                Value = [2, -1]
             },
             new EventOption 
             {

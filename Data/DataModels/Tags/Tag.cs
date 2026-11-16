@@ -8,6 +8,7 @@ public abstract class Tag
     // Class properties...
     public Probability tagProbability {get; set;}
     public Quality tagQuality {get; set;}
+    
     [Key]
     public int TagId { get; set; }
 
@@ -39,6 +40,8 @@ public abstract class Tag
         GOOD, // (Tag.Quality)3;
         INCREDIBLE // (Tag.Quality)4;
     };
+
+    
 
     
 

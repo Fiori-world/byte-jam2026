@@ -51,7 +51,9 @@ public class OptionTag : Tag
 
         WORLDEVENT, // (OptionTag.ResourceGain)5;
 
-        SPECIAL // (OptionTag.ResourceGain)6;
+        NONE,// (OptionTag.ResourceGain)6;
+
+        SPECIAL, // (OptionTag.ResourceGain)7;
 
     }
     public enum ResourceCost
@@ -68,9 +70,12 @@ public class OptionTag : Tag
 
         WORLDEVENT, // (OptionTag.ResourceCost)5;
 
-        SPECIAL // (OptionTag.ResourceCost)6;
+        NONE, // (OptionTag.ResourceGain)6;
+
+        SPECIAL // (OptionTag.ResourceCost)7;
 
     }
+
 
     
 
