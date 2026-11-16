@@ -1,0 +1,35 @@
+body{
+    background-image: url(/byte-jam2026/assets/Bunker_Bed.png);
+    overflow: hidden;
+}
+
+img{
+    height: 800px;
+}
+
+div{
+    position: absolute;
+    top: 470px;
+    left: 540px;
+}
+
+#awake{
+    height: 100px;
+    width: 140px;
+    margin: 20px;
+    background-color: #39382f;
+    color: #e2caa4;
+}
+
+#awake a{
+    text-decoration: none;
+    color: #e2caa4;
+}
+
+#Sleep{
+    height: 100px;
+    width: 140px;
+    margin: 20px;
+    background-color: #39382f;
+    color: #e2caa4;
+}
