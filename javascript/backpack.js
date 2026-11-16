@@ -4,7 +4,7 @@ const list = document.querySelector(".right");
 // What each item does (keep in sync with Scavenge/UseItem in logic.cs)
 const ITEM_INFO = {
   "Radio":         "Warns you of danger outside",
-  "Map":           "Never come back empty-handed",
+  "Map":           "Choose where you scavenge",
   "Gas Mask":      "Halves damage outside",
   "Crowbar":       "+1 food & water when scavenging",
   "First Aid Kit": "+40 health",

@@ -13,9 +13,10 @@ document.getElementById("journal").onclick = () => goTo("journal.html");
 document.getElementById("mirror").onClick = () => goTo("mirror.html");
 document.getElementById("backpack").onClick = () => goTo("backpack.html")
 
-document.getElementById("hatch").onClick = () => {
-    if (state && !state.eventDoneToday && !confirm("You haven't checked the journal today. Sleep anyway?")) return;
-    act("bunker/sleep", draw);
-}
+document.getElementById("hatch").onclick = e => {
+  e.preventDefault();   // the HTML link is href="#"
+  goTo("explore.html");
+};
+
 
 loadState(draw);
