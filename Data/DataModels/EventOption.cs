@@ -23,7 +23,10 @@ public class EventOption{
         {
             int? gain = Value.Length > i * 2 ? Value[i * 2] : null;
             int ? cost = Value.Length > i* 2 + 1 ? Value[i * 2 + 1] : null;
+            tags[i].ApplyTo(state, gain, cost);
         }
+        
+        
     }
 
     

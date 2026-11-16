@@ -61,7 +61,8 @@ static class JournalLogic
             Note("Health", health, state.Health);
             Note("Morale", morale, state.Morale);
 
-            var result = changes.Count > 0 ? string.Join(", ", changes) : "Nothing changed.";
+            var stats = changes.Count > 0 ? string.Join(", ", changes) : "Nothing changed.";
+            var result = string.IsNullOrWhiteSpace(option.ResultDescription) ? stats : $"{option.ResultDescription} ({stats})";
             return Results.Ok(new { Result = result, state });
         });
     }
