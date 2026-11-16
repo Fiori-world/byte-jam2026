@@ -1,21 +1,20 @@
 // journal.html: today's event, pick an option, confirm
 const descriptionEl = document.querySelector(".description");
 const optionButtons = document.querySelectorAll(".options button");
-const optionDescs   = document.querySelectorAll(".right p");
 const confirmButton = document.querySelector(".confirm");
 let selectedSlot = null;
 
-// Show or hide the option buttons, their descriptions and Confirm
+// Show or hide the option buttons and Confirm (the option text goes on the button)
 function showOptions(choices) {
   optionButtons.forEach((btn, i) => {
     const choice = choices[i];
-    btn.hidden = optionDescs[i].hidden = !choice;
+    btn.hidden = !choice;
     btn.disabled = false;
     btn.classList.remove("selected");
     if (choice) {
       btn.textContent = choice.text;
+      btn.title = choice.description;   // hover tooltip
       btn.dataset.slot = choice.slot;
-      optionDescs[i].textContent = choice.description;
     }
   });
   confirmButton.hidden = choices.length === 0;

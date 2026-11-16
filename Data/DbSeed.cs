@@ -45,12 +45,7 @@ public class DbSeed
                 EventId = Guid.Parse("9b676360-4672-421b-a5d3-75133b243ae0"),
                 EventDescription = "Humans are social creatures. And being alone for a long time- isn't exactly great for your mental. \n So of course when I heard someone else talking I was excited to start a conversation...! Until I realized I was still alone.",
                 Tags = {new EventTag("UNCOMMON", "BAD", "MORALE")},
-                Options = {1,2,3}
-            },
-
-            new Event
-            {
-                
+                Options = {4,5,6}
             });
 
         await context.EventOptions.AddRangeAsync(

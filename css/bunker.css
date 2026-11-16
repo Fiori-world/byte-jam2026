@@ -1,169 +1,64 @@
+/* The bunker is one "scene" with the background's shape (1920 x 1080, 16:9).
+   The scene scales to fit any window or monitor, and every object is placed in
+   percentages of the scene, so everything stays lined up with the room.
+   To move an object: left/top are % of the room's width/height, width is % of its width. */
+
+html,
 body {
-  background-image: url("../assets/Bunker_Base.png");
-  aspect-ratio: 16 / 9;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  margin: 0;
+  height: 100%;
   overflow: hidden;
+  background-color: #1e1d19; /* shows as bars if the window isn't 16:9 */
 }
 
+.scene {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(100vw, calc(100vh * 16 / 9)); /* as big as fits, keeping 16:9 */
+  aspect-ratio: 16 / 9;
+  background-image: url("../assets/Bunker_Base.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Clickable objects */
 .interactables button {
-  background-color: rgba(0, 0, 0, 0);
-  border: hidden;
+  position: absolute;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.interactables a,
+.interactables img {
+  display: block;
+  width: 100%;
+}
+
+#hatch    { left: 26.43%; top: 0.69%;  width: 40.82%; }
+#journal  { left: 29.04%; top: 52.89%; width: 14.45%; }
+#backpack { left: 14.06%; top: 60.30%; width: 10.94%; }
+#mirror   { left: 86.33%; top: 22.11%; width: 10.68%; }
+#hammock  { left: 18.62%; top: 81.13%; width: 57.16%; }
+
+/* Food cans (top two shelves) and water bottles (bottom two shelves) */
+[id^="can"],
+[id^="water"] {
   position: absolute;
 }
 
-#journal {
-  top: 416px;
-  left: 440px;
-}
+[id^="can"]   { width: 3.85%; }
+[id^="water"] { width: 2.54%; }
 
-#backpack {
-  top: 480px;
-  left: 210px;
-}
+#can1, #can5, #water1, #water5 { left: 58.59%; }
+#can2, #can6, #water2, #water6 { left: 63.67%; }
+#can3, #can7, #water3, #water7 { left: 68.75%; }
+#can4, #can8, #water4, #water8 { left: 73.57%; }
 
-#hammock {
-  top: 660px;
-  left: 280px;
-}
-
-#mirror {
-  top: 150px;
-  right: 40px;
-}
-
-#hatch {
-  left: 400px;
-  bottom: 660px;
-}
-
-#can1 {
-  max-width: 78px;
-  height: 78px;
-
-  position: absolute;
-  left: 900px;
-  top: 209px;
-}
-
-#can2 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 978px;
-  top: 209px;
-}
-
-#can3 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1056px;
-  top: 209px;
-}
-
-#can4 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1130px;
-  top: 209px;
-}
-
-#can5 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 900px;
-  top: 317px;
-}
-
-#can6 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 978px;
-  top: 317px;
-}
-
-#can7 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1056px;
-  top: 317px;
-}
-
-#can8 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1130px;
-  top: 317px;
-}
-
-#water1 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 900px;
-  top: 424px;
-}
-
-#water2 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 978px;
-  top: 424px;
-}
-
-#water3 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1056px;
-  top: 424px;
-}
-
-#water4 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1130px;
-  top: 424px;
-}
-
-#water5 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 900px;
-  top: 520px;
-}
-
-#water6 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 978px;
-  top: 520px;
-}
-
-#water7 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1056px;
-  top: 520px;
-}
-
-#water8 {
-  max-width: 78px;
-  height: 78px;
-  position: absolute;
-  left: 1130px;
-  top: 520px;
-}
+#can1, #can2, #can3, #can4         { top: 28.82%; }
+#can5, #can6, #can7, #can8         { top: 41.32%; }
+#water1, #water2, #water3, #water4 { top: 53.70%; }
+#water5, #water6, #water7, #water8 { top: 64.81%; }

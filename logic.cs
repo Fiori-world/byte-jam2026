@@ -59,6 +59,7 @@ public class GameState
     public bool EventDoneToday { get; set; }
     public bool ScavengedToday { get; set ;}
     public bool BrushedToday { get; set; }
+    public List<Guid> SeenEvents { get; set; } = [];   // events shown this cycle (no repeats until all are seen)
 
     public bool GameOver => Health <= 0;
 
@@ -75,6 +76,7 @@ public class GameState
         EventDoneToday = false;
         ScavengedToday = false;
         BrushedToday = false;
+        SeenEvents = [];
     }
 
     // The option's tags (from the database) decide how the stats change

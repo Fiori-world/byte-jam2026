@@ -16,10 +16,11 @@ static class JournalLogic
                 : null;
             if (ev is null && state.EventDoneToday)
                 return Results.Conflict("You've already dealt with today's event. Sleep to start a new day.");
-            ev ??= await store.GetRandomEventAsync();
+            ev ??= await store.GetRandomEventAsync(state.SeenEvents);
             if (ev is null) return Results.NotFound("No events available.");
 
             state.CurrentEventId = ev.EventId;
+            if (!state.SeenEvents.Contains(ev.EventId)) state.SeenEvents.Add(ev.EventId);
             var options = await store.GetOptionsAsync(ev);
 
             return Results.Ok(new

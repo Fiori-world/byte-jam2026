@@ -59,7 +59,10 @@ itemButtons.forEach(btn => btn.onclick = () => {
     render();
 });
 
-playButton.onclick = async () => {
+playButton.onclick = async (e) => {
+    // The HTML wraps "Play" in a link to bunker.html. Don't follow it yet:
+    // the new game has to be created on the backend first, then we go to the bunker.
+    e.preventDefault();
     if ((food === 0 || water === 0) && !confirm("You're starting with no food or no water. Go anyways?")) return;
     try{
         await apiPost("/game/new", { difficulty, food, water, items: [...items] });

@@ -31,9 +31,12 @@ function statsText(s) {
   return `Day ${s.day} | Food ${s.food} | Water ${s.water} | Health ${s.health}/100 | Morale ${s.morale}/50`;
 }
 
-// Buttons that wrap a link: clicking anywhere on the button follows the link
+// Buttons that wrap a link: clicking anywhere on the button follows the link,
+// unless the page's own JS handles that button (like Play on the intro screen)
 document.querySelectorAll("button > a").forEach(a => {
-  a.parentElement.addEventListener("click", e => {
+  const button = a.parentElement;
+  button.addEventListener("click", e => {
+    if (button.onclick) return;              // the page handles this button itself
     if (!e.target.closest("a")) a.click();   // only when the click missed the link itself
   });
 });

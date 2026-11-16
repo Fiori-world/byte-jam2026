@@ -1,35 +1,63 @@
-body{
-    background-image: url("../assets/Bunker_Bed.png");
-    overflow: hidden;
+/* The bed page is one 16:9 "scene" that scales to fit any window or monitor.
+   Everything is placed in % of the scene, and text uses cqw (1cqw = 1% of the
+   scene's width), so the hammock and buttons stay lined up at every size. */
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: #1e1d19; /* shows as bars if the window isn't 16:9 */
 }
 
-img{
-    height: 800px;
+.scene {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  container-type: size;
+  overflow: hidden;
+  background-image: url("../assets/Bunker_Bed.png");
+  background-size: 125% auto;
+  background-position: top left;
+  background-repeat: no-repeat;
 }
 
-div{
-    position: absolute;
-    top: 470px;
-    left: 540px;
+/* The big hammock picture */
+.scene > img {
+  position: absolute;
+  left: 0.52%;
+  top: 0.93%;
+  width: 89.39%;
 }
 
-#awake{
-    height: 100px;
-    width: 140px;
-    margin: 20px;
-    background-color: #39382f;
-    color: #e2caa4;
+/* Stay Awake / Go To Sleep */
+#awake,
+#Sleep {
+  position: absolute;
+  z-index: 1; /* above the hammock picture */
+  top: 56.71%;
+  width: 9.11%;
+  height: 11.57%;
+  padding: 0;
+  border: none;
+  font-size: 0.87cqw;
+  background-color: #39382f;
+  color: #e2caa4;
+  cursor: pointer;
 }
 
-#awake a{
-    text-decoration: none;
-    color: #e2caa4;
-}
+#awake { left: 36.46%; }
+#Sleep { left: 48.44%; }
 
-#Sleep{
-    height: 100px;
-    width: 140px;
-    margin: 20px;
-    background-color: #39382f;
-    color: #e2caa4;
+#awake a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #e2caa4;
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 interface IEventStore
 {
-    Task<Event?> GetRandomEventAsync();
+    Task<Event?> GetRandomEventAsync(List<Guid> seen);
     Task<Event?> GetEventAsync(Guid id);
     Task<List<EventOption>> GetOptionsAsync(Event ev);
 }
@@ -21,18 +21,29 @@ class DatabaseEventStore(GameDbContext db) : IEventStore
             _                        => 1
         };
 
-    public async Task<Event?> GetRandomEventAsync()
+    // Picks an event the player hasn't seen this cycle (rarity still applies).
+    // Once every event has been seen, a new cycle starts.
+    public async Task<Event?> GetRandomEventAsync(List<Guid> seen)
     {
         var events = await db.Events.Include(e => e.Tags).ToListAsync();
         if (events.Count == 0) return null;
 
-        var roll = Random.Shared.Next(events.Sum(Weight));
-        foreach (var e in events)
+        var fresh = events.Where(e => !seen.Contains(e.EventId)).ToList();
+        if (fresh.Count == 0)
+        {
+            // New cycle, but don't repeat the event from yesterday
+            var last = seen.LastOrDefault();
+            seen.Clear();
+            fresh = events.Count > 1 ? events.Where(e => e.EventId != last).ToList() : events;
+        }
+
+        var roll = Random.Shared.Next(fresh.Sum(Weight));
+        foreach (var e in fresh)
         {
             roll -= Weight(e);
-            if (roll < 0) return await GetEventAsync(e.EventId);
+            if (roll < 0) return e;
         }
-        return null;
+        return fresh[^1];
     }
 
     // Loads the event with its tags, its options, and each option's tags
