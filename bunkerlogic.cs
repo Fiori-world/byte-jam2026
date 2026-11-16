@@ -9,6 +9,9 @@ static class BunkerLogic
         bunker.MapPost("/sleep", (GameState state) =>
         {
             if (state.GameOver) return Results.BadRequest("Game over.");
+            // You can't end the day until you've dealt with today's journal entry
+            if (!state.EventDoneToday)
+                return Results.Conflict("You can't sleep yet. Check the journal and deal with today's event first.");
             state.EndDay();
 
             var result = $"You slept. Day {state.Day} begins.";
@@ -23,7 +26,8 @@ static class BunkerLogic
             if (state.GameOver) return Results.BadRequest("Game over.");
             if (!GameState.Locations.ContainsKey(location)) return Results.BadRequest("Unknown location.");
             if (state.ScavengedToday) return Results.Conflict("You've already been outside today. Sleep first.");
-            return Results.Ok(new { Result = state.Scavenge(location), state });
+            var (wentTo, result) = state.Scavenge(location);
+            return Results.Ok(new { Result = result, Location = wentTo, state });   // Location = where you really ended up
         });
     }
 }

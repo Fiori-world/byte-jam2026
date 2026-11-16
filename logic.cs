@@ -129,7 +129,8 @@ public class GameState
     };
 
     // Go outside once a day. Without a map you end up somewhere random.
-    public string Scavenge(string location)
+    // Returns where you actually ended up (for the explore page's background) and what happened.
+    public (string Location, string Result) Scavenge(string location)
     {
         ScavengedToday = true;
         var rng = Random.Shared;
@@ -174,7 +175,7 @@ public class GameState
             result += mask ? $" Toxic air out there, but the gas mask helped. -{damage} health."
                            : $" Something out there hurt you. -{damage} health.";
         }
-        return result;
+        return (location, result);
     }
     public string? UseItem(string item)
     {

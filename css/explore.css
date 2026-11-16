@@ -35,6 +35,7 @@ h1 {
   font-family: papyrus;
   font-size: 2.08cqw;
   color: #e2caa4;
+  text-shadow: 0 0 0.4cqw #000, 0 0 0.8cqw #000; /* readable even in front of the sun */
 }
 
 #map img {
@@ -69,3 +70,55 @@ h1 {
 #home       { left: 67.71%; top: 54.40%; }
 #office     { left: 81.71%; top: 43.98%; }
 #lake       { left: 81.71%; top: 64.81%; }
+
+/* After scavenging: the background becomes the place you went, and the map goes away.
+   explore.js adds "visiting" and "at-<location>" to the scene. */
+.scene.at-gasStation { background-image: url("../assets/Gas-Station.png"); }
+.scene.at-office     { background-image: url("../assets/Office.webp"); }
+.scene.at-lake       { background-image: url("../assets/Lake.webp"); }
+
+.scene.visiting {
+  background-size: 100% 100%; /* the location pictures are 16:9, so they fill the scene exactly */
+}
+
+.scene.visiting #map,
+.scene.visiting .mapButtons {
+  display: none;
+}
+
+/* What happened out there */
+#result {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  transform: translateX(-50%);
+  width: 60%;
+  padding: 1.2cqw 2cqw;
+  box-sizing: border-box;
+  background: rgba(30, 29, 25, 0.88);
+  border: 0.2cqw ridge #82745d;
+  border-radius: 0.8cqw;
+  text-align: center;
+  font-family: papyrus;
+  color: #e2caa4;
+}
+
+#result[hidden] {
+  display: none;
+}
+
+#resultText {
+  margin: 0 0 1cqw;
+  font-size: 1.4cqw;
+  line-height: 1.4;
+}
+
+#resultBack {
+  display: inline-block;
+  padding: 0.5cqw 1.5cqw;
+  border-radius: 0.5cqw;
+  background: #39382f;
+  color: #e2caa4;
+  font-size: 1.1cqw;
+  text-decoration: none;
+}

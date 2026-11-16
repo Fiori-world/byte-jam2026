@@ -17,11 +17,23 @@ static class JournalLogic
             if (ev is null && state.EventDoneToday)
                 return Results.Conflict("You've already dealt with today's event. Sleep to start a new day.");
             ev ??= await store.GetRandomEventAsync(state.SeenEvents);
-            if (ev is null) return Results.NotFound("No events available.");
+            if (ev is null)
+            {
+                // Nothing to read today: count the journal as done so the player can still sleep
+                state.EventDoneToday = true;
+                return Results.NotFound("No events available.");
+            }
 
             state.CurrentEventId = ev.EventId;
             if (!state.SeenEvents.Contains(ev.EventId)) state.SeenEvents.Add(ev.EventId);
             var options = await store.GetOptionsAsync(ev);
+
+            // An event with no choices can't be answered, so reading it counts as done
+            if (options.Count == 0)
+            {
+                state.CurrentEventId = null;
+                state.EventDoneToday = true;
+            }
 
             return Results.Ok(new
             {

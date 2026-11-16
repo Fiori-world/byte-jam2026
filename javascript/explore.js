@@ -1,14 +1,33 @@
 // explore.html: pick where to scavenge. "Stay Home" is a plain link.
-const heading = document.querySelector("h1");
+// After scavenging, the background changes to the place you went and the result is shown.
+const scene       = document.querySelector(".scene");
+const heading     = document.querySelector("h1");
 const spotButtons = ["gasStation", "office", "lake"].map(id => document.getElementById(id));
+const resultBox   = document.getElementById("result");
+const resultText  = document.getElementById("resultText");
+const resultBack  = document.getElementById("resultBack");
+
+const PLACE_NAMES = { gasStation: "the Gas Station", office: "the Office", lake: "the Lake" };
+
+// Load the location pictures now, so the background switches instantly
+["../assets/Gas-Station.png", "../assets/Office.webp", "../assets/Lake.webp"]
+  .forEach(src => new Image().src = src);
 
 async function scavenge(location) {
   spotButtons.forEach(b => b.disabled = true);   // no double clicks
   try {
     const r = await apiPost(`/bunker/scavenge/${location}`);
-    alert(r.result);                             // popup, since we leave the page next
-    if (r.state.gameOver) return gameOver();
-    goTo("bunker.html");
+
+    // r.location is where you really ended up (without a map you can get lost)
+    scene.classList.add("visiting", `at-${r.location}`);
+    heading.textContent = `Scavenging at ${PLACE_NAMES[r.location]}`;
+    resultText.textContent = r.result;
+    resultBox.hidden = false;
+
+    if (r.state.gameOver) {
+      resultBack.textContent = "Continue";
+      resultBack.onclick = e => { e.preventDefault(); gameOver(); };
+    }
   } catch (err) {
     alert(err.message);
     goTo("bunker.html");

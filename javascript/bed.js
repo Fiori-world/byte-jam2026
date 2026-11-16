@@ -3,8 +3,12 @@ const sleepButton = document.getElementById("Sleep");
 let state = null;
 
 sleepButton.onclick = async () => {
-  if (state && !state.eventDoneToday &&
-      !confirm("You haven't checked the journal today. Sleep anyway?")) return;
+  // Can't sleep until today's journal entry is dealt with (the backend checks this too)
+  if (state && !state.eventDoneToday) {
+    if (confirm("You can't sleep yet. You need to deal with today's journal entry first.\n\nGo to the journal now?"))
+      goTo("journal.html");
+    return;
+  }
 
   sleepButton.disabled = true;   // no double sleeping
   try {
