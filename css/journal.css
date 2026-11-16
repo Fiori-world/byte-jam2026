@@ -1,82 +1,85 @@
+
 body {
-    background-color: #39382f;
+    background-image: url("../assets/Bunker_Journal.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
     font-family: Georgia, serif;
     color: #eee4d2;
     text-align: center;
     margin: 0;
     padding: 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
 }
 
 h1 {
-    font-size: 55px;
-    margin-bottom: 10px;
+    font-size: 50px;
+    margin-bottom: 20px;
 }
 
+/* Book background */
 .journal {
+    background-image: url("../assets/BookLarge.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    aspect-ratio: 1.6;
+
     display: flex;
-    gap: 30px;
-    margin: 30px auto;
-    align-items: stretch;
+    box-sizing: border-box;
+    padding: 10% 12%;
+    gap: 12%;
 }
 
+/* Book pages */
 .left, .right {
     flex: 1;
     min-width: 0;
-    box-sizing: border-box;
-    background-color: #514b3d;
-    border: 4px ridge #82745d;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 5px 8px 15px #25241e;
+    color: #34291e;
+    text-align: center;
+    overflow-y: auto;
 }
-
 
 h2 {
-    font-size: 35px;
-    margin-top: 5px;
-    border-bottom: 2px solid #a59579;
-    padding-bottom: 15px;
+    font-size: 26px;
+    margin-top: 0;
 }
 
-h3 {
-    font-size: 23px;
-    color: #e2caa4;
-    margin-top: 30px;
-}
-
+/* Event text */
 .description {
-    background-color: #665d4b;
-    border: 1px solid #97876c;
-    border-radius: 5px;
-    padding: 25px;
-    font-size: 22px;
+    font-size: 19px;
     line-height: 1.6;
     text-align: left;
 }
 
+/* Choices */
 .options {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
-    flex-wrap: wrap;
 }
 
 button {
     background-color: #a58d69;
     color: #211e19;
-    width: 150px;
-    min-height: 70px;
-    margin: 10px;
-    border: 2px solid #d2bd9c;
+    border: 2px solid #806b4d;
     border-radius: 5px;
+    padding: 12px;
     font-family: Georgia, serif;
-    font-size: 17px;
+    font-size: 16px;
     cursor: pointer;
+    width: 90%;
 }
 
 button:hover {
@@ -84,38 +87,45 @@ button:hover {
 }
 
 .confirm {
-    width: 200px;
+    margin-top: 20px;
+    background-color: #807352;
 }
 
-.right p {
-    background-color: #665d4b;
-    border: 1px solid #97876c;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 12px 0;
-    font-size: 20px;
-    text-align: left;
-}
-
+/* Back button */
 .back {
-    width: 200px;
+    display: inline-block;
+    background-color: #a58d69;
+    color: #211e19;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+.back:hover {
+    background-color: #c4ab83;
 }
 
 @media (max-width: 700px) {
     h1 {
-        font-size: 38px;
+        font-size: 32px;
     }
 
     .journal {
-        flex-direction: column;
+        padding: 9% 10%;
+        gap: 8%;
     }
 
-    .left, .right {
-        padding: 20px;
+    h2 {
+        font-size: 16px;
     }
 
-    .options {
-        flex-direction: column;
-        align-items: center;
+    .description {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 11px;
+        padding: 6px;
     }
 }
