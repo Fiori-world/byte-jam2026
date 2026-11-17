@@ -80,7 +80,7 @@ public class DbSeed
             {
                 EventId = Guid.Parse("e9b19886-1338-49ef-a242-7ed1465520ff"),
                 EventDescription = "Today, you wake up, and the ground (for some inexplicable reason) doesn't hurt your back. You grab your rations, and the pack is your favorite. The water somehow just got below room temperature and tastes crisp and fresh. Today is- going really good for some reason, and all your regular chores are done way early. What should you do with all this extra time?",
-                Tags = {new EventTag("COMMON", "MORALE", "SPECIAL")},
+                Tags = {new EventTag("COMMON", "GOOD", "SPECIAL")},
                 Options = {19,20,21}
             });
             // TODO:  INCORPORATE EVENT OPTIONS FOR THESE EVENTS
@@ -187,10 +187,11 @@ public class DbSeed
                 EventId = Guid.Parse("696e7b70-671b-40ae-97d4-454565726dd4"),
                 OptionId = 9,
                 OptionDescription = "I saw my bunker- stocked to the brim! Shelf full of supplies.",
-                Tags = {new OptionTag("RARE", "INCREDIBLE", "FOOD", "WATER")},
+                // Two "gain" tags: one adds food, one adds water (the 2nd number of a pair is always a cost)
+                Tags = {new OptionTag("RARE", "INCREDIBLE", "FOOD", "NONE"), new OptionTag("RARE", "NEUTRAL", "WATER", "NONE")},
                 ResultDescription = "You dreamed of that security. The peace and comfort that comes with wealth. You closed your eyes tight and wished. It looks like someone actually heard your wish- actually delivered you a miracle. You woke up to find your shelf full of food and water.",
                 // I'm doing a little code trickery here- instead of a negative value I'm using a positive to add supplies
-                Value = [5,5]
+                Value = [5, 0, 5, 0]   // +5 food, +5 water
             },
             // -----------------------------------------------------------------------------
             // Event Set:  Smell
@@ -258,7 +259,7 @@ public class DbSeed
             new EventOption 
             {
                 EventId = Guid.Parse("07cae63f-6bd8-4e64-90c2-a2cb9bbf91b7"),
-                OptionId = 0,
+                OptionId = 16,
                 OptionDescription = "HIDE. NOW.",
                 Tags = {new OptionTag("RARE", "HORRIBLE", "NONE", "FOOD")},
                 ResultDescription = "You cower below the large table and cover your mouth to not make a sound. The hatch slides open- and it enters. It starts as a small drizzle, but then it slops and splats onto the bunker floor. It's some kind of ooze- but it's made of meat. Bones portrude at awkward angles. Human bones. It slides over to the shelf, and it amphorphously swallows a row of cans whole. it then stretches its body and 'climbs' back out. You can't even begin to understand what just happened- other than the immediate fact that you just lost a lot of food.",
@@ -267,7 +268,7 @@ public class DbSeed
             new EventOption 
             {
                 EventId = Guid.Parse("07cae63f-6bd8-4e64-90c2-a2cb9bbf91b7"),
-                OptionId = 0,
+                OptionId = 17,
                 OptionDescription = "Prepare to fight whatever comes out- protect the supplies at all costs!",
                 Tags = {new OptionTag("RARE", "HORRIBLE", "NONE", "HEALTHCONDITION")},
                 ResultDescription = "You grab a particularlly hefty looking can and get ready to wallop the would-be intruder, only to find that when the hatch does open, it's one- its MANY. From the hatch, a flowing tide of rodents pours into the bunker. They scatter, all around, looking for food and water. You defiantly guard the shelf of food and begin smacking rats. But this only makes them angrier. They cover you in an instant, little rat bites all over your body- you continue to defend your supplies. The rats retreat without any of your supplies. While this may seem like a victory- you are also covered in rat bites. From dirty, radioactive, and probably diseased rats.",
@@ -276,7 +277,7 @@ public class DbSeed
             new EventOption 
             {
                 EventId = Guid.Parse("07cae63f-6bd8-4e64-90c2-a2cb9bbf91b7"),
-                OptionId = 0,
+                OptionId = 18,
                 OptionDescription =  "Thow open the hatch in the things face, then RUN!",
                 Tags = {new OptionTag("RARE", "HORRIBLE", "NONE", "MORALE")},
                 ResultDescription = "You throw open the hatch and bolt away- only to find... nothing. Nobody is outside. You cautiously peek back into the bunker- but there's nothing. Slowly climbing back down into the bunker- you scan the whole room. Not a trace. Except... for the mirror. Inside the mirror. Something stares back. Your reflection- the EYES of your reflection- they're not yours. Peircing. Jet black eyes. Your face goes pale. But the mirror does not reflect that. It just smiles.",
@@ -287,8 +288,8 @@ public class DbSeed
             // -----------------------------------------------------------------------------
             new EventOption 
             {
-                EventId = Guid.Parse(""),
-                OptionId = 0,
+                EventId = Guid.Parse("e9b19886-1338-49ef-a242-7ed1465520ff"),
+                OptionId = 19,
                 OptionDescription = "Not everything has a catch. Fortune smiles upon me today, so I'm just going to enjoy it.",
                 Tags = {new OptionTag("UNCOMMON", "GOOD", "MORALE", "NONE")},
                 ResultDescription = "And enjoy it you do! You kick back and relax- taking a (much needed) day off- slowing down and practicing some gratitude for what little you have here. Maybe things aren't as bad as they seem.",
@@ -296,8 +297,8 @@ public class DbSeed
             },
             new EventOption 
             {
-                EventId = Guid.Parse(""),
-                OptionId = 0,
+                EventId = Guid.Parse("e9b19886-1338-49ef-a242-7ed1465520ff"),
+                OptionId = 20,
                 OptionDescription = "I'm going to double check my math on rationing. Just to be sure I'm using my supplies to their fullest.",
                 Tags = {new OptionTag("UNCOMMON", "GOOD", "FOOD", "NONE")},
                 ResultDescription = "Upon reviewing your calculations... You forgot to carry the zero. You were a whole tens-place off. Wow. Yeah- you actually have a fair bit more food than you thought you did. Cool!",
@@ -305,8 +306,8 @@ public class DbSeed
             },
             new EventOption 
             {
-                EventId = Guid.Parse(""),
-                OptionId = 0,
+                EventId = Guid.Parse("e9b19886-1338-49ef-a242-7ed1465520ff"),
+                OptionId = 21,
                 OptionDescription = "I still need to stay prepared. Lets use this time to check for any unadressed cuts or scrapes that might get worse without some TLC.",
                 Tags = {new OptionTag("UNCOMMON", "GOOD", "HEALTHCONDITION", "NONE")},
                 ResultDescription = "You spend the rest of the day patching up any little boo-boos you forgot about or just rubbed some dirt on and called it a day with ACTUAL bandages and antibiotics. You never know- could prevent you from losing a finger later on!",
